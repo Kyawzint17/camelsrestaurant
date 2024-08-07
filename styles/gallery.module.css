@@ -1,0 +1,110 @@
+.galleryPage {
+    background-color:rgba(185, 180, 180, 0.5);/*background: url(/backgroundGallery.jpg);*/
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the background image */
+    position: relative;
+}
+
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(254, 254, 254, 0.8);
+}
+
+.head {
+    position: absolute;
+    top: 150px;
+    left: 19%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    z-index: 10;
+}
+
+.container, .container2, .container3 {
+    width: 90%;
+    max-width: 950px; /* Set a maximum width for containers */
+    height: auto; /* Adjust height as needed */
+    display: flex;
+    flex-direction: column; /* Display items in a column */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 253, 253, 0.7);
+    border-radius: 10px;
+    padding: 10px;
+    position: relative; /* Relative position to maintain flow in document */
+    margin-top: 40px; /* Adjust top margin as needed */
+}
+
+.container {
+    margin-top: 80px; /* Example adjustment */
+}
+
+.container2 {
+    margin-top: 60px; /* Example adjustment */
+}
+
+.container3 {
+    margin-top: 80px; /* Example adjustment */
+}
+
+.title, .title2 {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+    text-align: center; /* Center titles */
+}
+
+.textBox {
+    position: absolute;
+    bottom: 98.8%; /* Adjust as needed */
+    left: 63.3%;
+    transform: translateX(-50%);
+    width: 70%; /* Adjust width */
+    text-align: center; /* Center text */
+    color: white;
+}
+
+.textBox2 {
+    position: absolute;
+    bottom: 99.1%; /* Adjust as needed */
+    left: 63.4%;
+    transform: translateX(-50%);
+    width: 70%; /* Adjust width */
+    text-align: center; /* Center text */
+    color: white;
+}
+
+.textBox3{
+    position: absolute;
+    bottom: 99.4%; /* Adjust as needed */
+    left: 63.5%;
+    transform: translateX(-50%);
+    width: 70%; /* Adjust width */
+    text-align: center; /* Center text */
+    color: white;
+}
+
+.box, .box2, .box3, .box4, .box5, .box6, .box7 {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+/* <div className={styles.box}>
+                              
+    </div>
+*/
+.galleryImage, .galleryImageBig, .galleryImage2, .galleryImage3 {
+    width: 100%; /* Ensure images take full width of their containers */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+}

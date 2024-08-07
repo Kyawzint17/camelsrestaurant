@@ -1,0 +1,72 @@
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Adjust as necessary */
+    background-color: rgba(254, 254, 254, 0.8); /* Optional: Add a background color */
+}
+
+.aboutPage {
+    background: url(/abtus.png);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%; /* Make sure it takes full width */
+    height: 100%; /* Make sure it takes full height */
+    background-repeat: no-repeat; /* Ensure no repeat of the background image */
+    background-size: 1000px; /* Ensure the image covers the entire container */
+    background-position: center;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 24%;
+    margin-bottom: 80px; /* Adjust margin to create space between text and icons */ 
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 5%;
+    margin-top: 40px; /* Adjust margin to create space between text and icons */ 
+}
+
+.title {
+    font-size: 50px; /* Adjust the font size as needed */
+    color: white; /* Adjust the color as needed */   
+    /* font-weight: bold; margin: 10px 0; Optional: Add margin between text elements */
+}
+
+.iconImage {
+    width: 90px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.iconItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align text under icons */
+    margin: 0 11px; /* Add margin for spacing between items */
+}
+
+.iconText {
+    font-size: 22px;
+    margin-top: 2px;
+    margin-left: -8px;
+    text-align: center; /* Center align text */
+    white-space: nowrap;
+}
+
+.paragraph {
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    margin-top: 60px; /* Adjust as needed for spacing */
+    max-width: 425px; /* Optional: limit the width of the paragraph */
+}

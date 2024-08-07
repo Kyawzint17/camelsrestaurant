@@ -1,0 +1,125 @@
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Adjust as necessary */
+    min-height: 100vh;
+    background-color: rgb(240, 240, 240); /* Optional: Add a background color */
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+   /*  background-color: rgba(254, 254, 254, 0.8);  Background color */
+    flex-grow: 1; /* Allows it to grow and fill the remaining space */
+}
+
+.imageContainer {
+    position: relative; /* Ensures the text can be positioned absolutely within this container */
+    width: 100%; /* Set width as per your image */
+    height: 500px; /* Set height as per your image */
+    overflow: hidden; /* Ensures that any overflow is hidden */
+     /* margin-bottom: 20px; Adds space between the image and the next section */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 0; /* Ensure the image is below the gradient and text */
+    filter: brightness(80%);
+}
+
+.header {
+    position: absolute;
+    top: 45%;
+    left: 70%;
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white;
+    font-size: 55px; /* Adjust font size as needed */
+    /*  background: rgba(0, 0, 0, 0.5); Optional: Add a semi-transparent background for better text visibility */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.menuBox {
+    display: flex;
+    flex-direction: column; /* Arrange post boxes in a column*/
+    justify-content: center; /* Center the post boxes horizontally */
+    align-items: center; /* Center the content vertically */
+    background-color: rgba(240, 240, 240, 0.9); /* Set background color */
+    padding: 20px; /* Optional: Add padding around the container */
+    width: 100%;
+    height: 100%;
+   
+    /* border-radius: 10px;  Optional: Add rounded corners */   
+}
+
+.categoriesBox{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.categoriesBox button {
+  background-color: #9A7B4F; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.foodContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menuItem {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    background-color: #9A7B4F;
+}
+
+.menuItemDetails {
+    margin-top: 10px;
+}
+
+.menuItemDetails h3 {
+    margin: 0;
+}
+
+.menuItemDetails p {
+    margin: 5px 0;
+}
+
+.createMenuButton {
+    position: absolute;
+    top: 60%;
+    left: 75%;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding: 10px 30px;
+    font-size: 18px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the font bold */
+    color: rgb(101, 93, 93);
+    background-color: rgba(254, 254, 254, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2; /* Ensure the button is above the gradient and image */
+    text-align: center;
+}

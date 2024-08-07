@@ -1,0 +1,159 @@
+.home-page {
+    background-color: white;
+    color: black;
+    height: auto;
+    width: 100vw;
+    min-height: 100vh;
+    display: grid;
+}
+
+.cover {
+    background-image: url('../public/activitybackground.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    height: 60vw;
+    width: 100vw;
+    display: flex; /* Ensure content is centered if needed */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.container {    
+    margin: auto;
+    padding: 10px;
+    color: white;
+    margin-top: 50px;
+    width: 100vw;
+    height: 1000px;
+    position: absolute;
+    text-align: center;
+    font-size: 400%;
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.container2 {
+    background-color: #854A1E;
+    margin: auto;
+    border: 3px solid #BC885C;
+    padding: 10px;
+    color: black;
+    width: 90vw;
+    height: 700px;
+    position: relative;
+    text-align: center;
+    font-size: 300%;
+    margin-top: 200px;
+    border-radius: 20px;
+    opacity: .9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-pic {
+    background-color: white;
+    margin-left: 250px;
+    margin-top: 50px;
+    width: 25vw;
+    height: 25vw;
+    border: 3px solid #BC885C;
+    padding: 40px;
+    border-radius: 20px;
+    box-sizing: border-box; /* Ensure padding is included in the width and height */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.container-text {
+    background-color: transparent;
+    margin-bottom: 150px;
+    margin-right: 350px;
+    width: 20vw;
+    height: 20vw;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: left;
+    box-sizing: border-box; /* Ensure padding is included in the width and height */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+@media (max-width: 1200px) {
+    .container {
+        height: auto; /* Adjust height for smaller screens */
+        padding: 20px; /* Add padding for smaller screens */
+        margin-top: 50px; /* Adjust top margin for smaller screens */
+    }
+
+    .cover {
+        height: auto; /* Adjust height for smaller screens */
+        padding: 20px; /* Add padding for smaller screens */
+    }
+
+    .container2 {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .container-pic, .container-text {
+        margin: 20px auto; /* Center on smaller screens */
+        width: 80%;
+        height: auto;
+    }
+}
+
+
+.text {
+    text-transform: uppercase;
+    font-size: 55%;
+    color: white;
+    margin-top: 50px;
+    margin-top: 20px
+}
+
+.category{
+    font-size: 200%;
+    color: black;
+    margin-top: 50px;
+}
+
+.price{
+    font-size: 200%;
+    color: black;
+    margin-top: 50px;
+}
+
+.description{
+    font-size: 200%;
+    color: black;
+    margin-top: 50px;
+}
+
+.create-button {
+    text-transform: uppercase;
+    background-color: gray  ;
+    color: white;
+    font-size: 50%;
+    cursor: pointer;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-top: 50px;
+    margin-right: 40px;
+}
+
+.input {
+    font-size: 30%;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: gray;
+}
+

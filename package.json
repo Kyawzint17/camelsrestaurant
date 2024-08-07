@@ -1,0 +1,21 @@
+{
+  "name": "test1",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/font": "13.4.10",
+    "date-fns": "^3.6.0",
+    "next": "13.4.10",
+    "react": "18.2.0",
+    "react-calendar": "^5.0.0",
+    "react-datepicker": "^7.2.0",
+    "react-dom": "18.2.0",
+    "react-image-mapper": "^0.0.15"
+  }
+}

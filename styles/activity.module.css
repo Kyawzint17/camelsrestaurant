@@ -1,0 +1,138 @@
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; /* Ensures it covers the full viewport height */
+    background-color: rgba(254, 254, 254, 0.8); /* Background color */
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+   /*  background-color: rgba(254, 254, 254, 0.8);  Background color */
+    flex-grow: 1; /* Allows it to grow and fill the remaining space */
+}
+
+.imageContainer {
+    position: relative; /* Ensures the text can be positioned absolutely within this container */
+    width: 100%; /* Set width as per your image */
+    height: 800px; /* Set height as per your image */
+    overflow: hidden; /* Ensures that any overflow is hidden */
+    margin-bottom: 20px; /* Adds space between the image and the next section */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 0; /* Ensure the image is below the gradient and text */
+}
+
+.header {
+    position: absolute;
+    top: 40%;
+    left: 66%;
+    transform: translate(-50%, -40%); /* Center the text */
+    color: white;
+    font-size: 66px; /* Adjust font size as needed */
+    /*  background: rgba(0, 0, 0, 0.5); Optional: Add a semi-transparent background for better text visibility */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.postButton {
+    position: absolute;
+    top: 52%;
+    left: 69%;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding: 10px 50px;
+    font-size: 20px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the font bold */
+    color: rgb(101, 93, 93);
+    background-color: rgba(254, 254, 254, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2; /* Ensure the button is above the gradient and image */
+    text-align: center;
+}
+
+
+.postContainer {
+    display: flex;
+    flex-direction: column; /* Arrange post boxes in a column*/
+    justify-content: center; /* Center the post boxes horizontally */
+    align-items: center; /* Center the content vertically */
+     /* background-color: rgba(240, 240, 240, 0.9); Set background color */
+    padding: 20px; /* Optional: Add padding around the container */
+     /* max-width: 1000px; Optional: Set a larger max width for the container */
+    border-radius: 10px; /* Optional: Add rounded corners */   
+}
+
+.postBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content inside the post box */
+    background-color: #80471C; /* Set background color of the post box */
+    padding: 20px; /* Add padding inside the post box */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better appearance */
+    width: 1000px; /* Set a fixed width for each post box */
+    margin-bottom: 20px;
+}
+
+.detailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content inside the detail container */
+    text-align: center; /* Center the text */
+}
+
+.postTitle {
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold;
+    margin-bottom: 10px; /* Space below the title */
+    color: #ffffff; /* Text color */
+}
+
+.postDescription {
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Space below the description */
+    color: #ffffff; /* Text color */
+    margin: 15px 0 0 0; /* Set top margin to 5px and remove other margins */
+}
+
+.dateRange {
+    font-size: 14px; /* Adjust the font size as needed */
+    color: rgb(213, 204, 204); /* Text color */
+    margin-top: 10px;
+    margin-left: 600px;
+}
+
+.iconImage {
+    width: 300px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    margin: 15px 0 0 0; /* Set top margin to 5px and remove other margins */
+}
+
+.line {
+    width: 52.5%; /* Adjust width as needed */
+    height: 2px; /* Adjust height as needed */
+    background-color: rgb(255, 255, 255); /* Set the background color to black */
+    margin: 5px 0 0 0; /* Set top margin to 5px and remove other margins */
+}
+
+.line2 {
+    width: 20%; /* Adjust width as needed */
+    height: 1px; /* Adjust height as needed */
+    background-color: rgb(213, 204, 204) ; /* Set the background color to black */
+    margin: 2px 0 0 0; /* Set top margin to 5px and remove other margins */
+    margin-left: 600px;
+}

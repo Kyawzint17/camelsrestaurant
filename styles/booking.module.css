@@ -1,0 +1,1162 @@
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; /* Ensures it covers the full viewport height */
+    background: url(/Bookingbackground.png); /* Background color */
+}
+
+.bookingPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%; /* Make sure it takes full width */
+    height: 100%; /* Make sure it takes full height */
+    background-repeat: no-repeat; /* Ensure no repeat of the background image */
+    background-size: 1000px; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the background image */
+}
+
+.container {
+    width: 750px; /* Adjust the width as needed */
+    height: 750px; /* Adjust the height as needed */
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color: rgba(254, 254, 254, 0.7); /* Background color for the rectangle box */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 10px; /* Optional: Add padding inside the container */
+    position: absolute; /* Position the container relative to galleryPage */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%; /* Adjust the width for smaller screens */
+        max-width: none; /* Remove maximum width */
+    }
+}
+
+/* Date and Time Booking css*/
+
+.calendarContainer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.datePicker {
+    width: 100%; /* Ensure the calendar spans the full width */
+    max-width: 600px; /* Adjust as needed */
+}
+
+
+.dateTitle {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 190px; /* Add some space above the selected date text */
+    background-color: #f0f0f0; /* Light gray background for the rectangle */
+    padding: 10px; /* Add some padding inside the rectangle */
+    border-radius: 5px; /* Rounded corners for the rectangle */
+    width: fit-content; /* Make the box fit the content */
+}
+
+.head {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
+}
+
+.squareBox {
+    width: 500px; /* Set the width of the square */
+    height: 300px; /* Set the height of the square */
+    background-color: #817b7b; /* Adjust the background color as needed */
+    position: absolute;
+    top: 480px; /* Center it vertically */
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 10px; /* Add padding inside the square */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    margin-top: 10px;
+}
+
+.timeSections {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row; /* Changed from column to row */
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.timeSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 10px;
+    
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.timeButton {
+    font-size: 12px;
+    margin: 4px 0;
+    padding: 15px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timeButton:hover {
+    background-color: #0056b3;
+}
+
+.displaySection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    width: 90%;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.selectedDate,
+.selectedTime {
+    font-size: 16px;
+    color: #333;
+    margin: 0 10px; /* Adjust the margin for better spacing */
+}
+
+.promptText {
+    font-size: 16px;
+    color: #ffffff;
+    padding: 10px;
+    margin-top: 120px;
+    margin-left: 150px;
+    text-align: center;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.navButton {
+    background-color: #605d5d; /* Customize button color */
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 330px;
+    margin-right: 120px;
+}
+
+.navButton:hover {
+    background-color: #0056b3;
+}
+
+.navButton:first-child {
+    margin-right: 115px; /* Adjust as needed */
+}
+
+.navButton:last-child {
+    margin-left: 120px; /* Adjust as needed */
+}
+
+/* seat selection css*/
+
+.container1 {
+    width: 1000px; /* Adjust the width as needed */
+    height: 800px; /* Adjust the height as needed */
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color: rgba(254, 254, 254, 0.7); /* Background color for the rectangle box */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 10px; /* Optional: Add padding inside the container */
+    position: absolute; /* Position the container relative to galleryPage */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .container1 {
+        width: 95%; /* Adjust the width for smaller screens */
+        max-width: none; /* Remove maximum width */
+    }
+}
+
+.seatLayoutContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    height: 370px;
+    background-color: #524e4ecc;
+    border-radius: 5px;
+}
+
+.imageContainer {
+    flex: 1;
+    max-width: 60%;
+    margin-right: 10px;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: auto;
+}
+
+.seatLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.seat {
+    background-color: rgb(231, 122, 13); /* Primary color for seats #007bff*/
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+}
+
+.seat:hover {
+    background-color: #0056b3; /* Darker shade for hover */
+}
+
+.seat:active {
+    transform: scale(0.95); /* Slight scale-down effect on click */
+}
+
+.seat.selected {
+    background-color: #28a745; /* Color for selected seats */
+}
+
+.seat.disabled {
+    background-color: #6c757d; /* Color for disabled seats */
+    cursor: not-allowed;
+}
+
+.numSeatsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.numSeatsContainer label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.numSeatsInput {
+    width: 60px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    margin-left: 10px;
+}
+
+/* Container for seat status */
+.seatStatusContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
+/* Individual status item */
+.statusItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 16px;
+}
+
+/* Status color squares */
+.statusColorReserved,
+.statusColorAvailable,
+.statusColorSelected {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* Reserved color */
+.statusColorReserved {
+    background-color: #ff0e06; /* Red */
+}
+
+/* Available color */
+.statusColorAvailable {
+    background-color: rgb(231, 122, 13); /* Orange */
+}
+
+/* Selected color */
+.statusColorSelected {
+    background-color: #28a745; /* Blue */
+}
+
+.selectedSeatsContainer {
+    margin-top: 20px;
+    text-align: center;
+    width: 1000px; /* Set a fixed width */
+    height: 130px; /* Set a fixed height */
+    border: 1px solid #524e4ecc;
+    border-radius: 8px;
+    background-color: #524e4ecc; /* Background color for the container */
+    overflow-y: auto; /* Add scroll if content overflows */
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selectedSeatsHeader {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fbebeb;
+}
+
+.selectedSeatsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; /* Center items vertically */
+}
+
+.selectedSeat {
+    background-color: #28a745; /* Color for selected seats */
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.noSeats {
+    font-size: 16px;
+    color: #e9ecee;
+    margin-top: 15px;
+}
+
+/* Container for additional information message box */
+.messageBox {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f1f1f1; /* Slightly off-white background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Label within the message box */
+.messageBox label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333; /* Darker text color for contrast */
+    margin-bottom: 8px;
+}
+
+/* Textarea input within the message box */
+.messageInput {
+    width: 100%;
+    height: 70px; /* Slightly taller for better usability */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333; /* Dark text color */
+    background-color: #fff; /* White background for the input */
+    resize: vertical; /* Allow vertical resizing */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+    transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+}
+
+/* Style for textarea on focus */
+.messageInput:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Blue shadow to highlight focus */
+}
+
+/* Container for the buttons */
+.buttonContainerSeat {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between; /* Align buttons to the left and right */
+    gap: 10px; /* Space between buttons */
+}
+
+/* Style for the navigation buttons */
+.navButtonSeat {
+    background-color: #605d5d; /* Customized button color */
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    flex: 1; /* Ensure buttons take up equal space */
+    /* Remove the margin-top and margin-right */
+}
+/* Hover and active states for the buttons */
+.navButtonSeat:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.navButtonSeat:active {
+    transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.navButtonSeat:first-child {
+    margin-right: 115px; /* Adjust as needed */
+}
+
+.navButtonSeat:last-child {
+    margin-left: 115px; /* Adjust as needed */
+}
+
+
+/* Booking fees and menu preorder css*/
+
+.squareBox2 {
+    width: 500px; /* Set the width of the square */
+    height: 280px; /* Set the height of the square */
+    background-color: #817b7b; /* Adjust the background color as needed */
+    position: absolute;
+    top: 350px; /* Center it vertically */
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+.paragraph {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.formRow {
+    margin-bottom: 80px;
+    width: 100%;
+}
+
+.formRow2 {
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.agreementSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+}
+
+.agreementSection label {
+    font-size: 16px;
+}
+
+.preorderSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+}
+
+.preorderSection p {
+    font-size: 16px;
+}
+
+.preorderOptions {
+    display: flex;
+    gap: 20px;
+    color: #ffffff;
+}
+
+.preorderOptions label {
+    font-size: 16px;
+}
+
+.buttonContainer1 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.navButton2 {
+    background-color: #605d5d; /* Customize button color */
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 440px;
+    margin-right: 160px;
+    transition: background-color 0.3s;
+}
+
+.navButton2:hover {
+    background-color: #0056b3;
+}
+
+.navButton2:active {
+    transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.navButton2:first-child {
+    margin-right: 195px; /* Adjust as needed */
+}
+
+.navButton2:last-child {
+    margin-left: 125px; /* Adjust as needed */
+}
+
+
+/* Menu Order Css */
+
+.squareBox3 {
+    width: 740px; /* Set the width of the square */
+    height: 600px; /* Set the height of the square */
+    background-color: #817b7b; /* Adjust the background color as needed */
+    position: absolute;
+    top: 370px; /* Center it vertically */
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: row; /* Change to row to split the box into two sections */
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.menuList {
+    width: 50%;
+    max-height: 100%; /* Ensure the menu list height does not exceed the container */
+    overflow-y: auto; /* Allow vertical scrolling if the content exceeds the height */
+}
+
+.categoryheader {
+    color: white;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menuDetails {
+    margin-left: 10px;
+    color: white;
+    font-size: 14px;
+    margin-left: 35px;
+}
+
+.orderSummary {
+    width: 45%;
+    background-color: #fff; /* Different background color for order summary */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners for the order summary */
+}
+
+.orderSummary h2,
+.orderSummary h3 {
+    margin-top: 0;
+}
+
+.orderSummary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.orderSummary li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust margin between items */
+}
+
+.itemInfo {
+    flex: 1; /* Allow item info to take up remaining space */
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+.orderButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 4px; /* Adjust margin as needed */
+    margin-left: 120px;
+    transition: background-color 0.3s;
+}
+
+.orderButton:hover {
+    background-color: #0056b3;
+}
+
+.plusButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; /* Adjust margin as needed */
+    transition: background-color 0.3s;
+}
+
+.plusButton:hover {
+    background-color: #0056b3;
+}
+
+.minusButton {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.minusButton:hover {
+    background-color: #c82333;
+}
+
+.buttonContainer2 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 180px;
+}
+
+.navButton3 {
+    background-color: #605d5d; /* Customize button color */
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 420px;
+    margin-right: 160px;
+    transition: background-color 0.3s;
+}
+
+.navButton3:hover {
+    background-color: #0056b3;
+}
+
+.navButton3:active {
+    transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.navButton3:first-child {
+    margin-right: 115px; /* Adjust as needed */
+}
+
+.navButton3:last-child {
+    margin-left: 115px; /* Adjust as needed */
+}
+
+/* PaymentForm Css */
+
+.squareBox4 {
+    width: 740px; /* Set the width of the square */
+    height: 600px; /* Set the height of the square */
+    background-color: #817b7b; /* Adjust the background color as needed */
+    position: absolute;
+    top: 370px; /* Center it vertically */
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: row; /* Split the box into two sections */
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    overflow-y: auto; /* Allow vertical scrolling */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better visual */
+}
+
+.paymentDetails {
+    display: flex;
+    flex-direction: column;
+    width: 60%; /* Adjust width as needed */
+    margin-right: 20px;
+}
+
+.contact, .payment {
+    margin-bottom: 20px;
+}
+
+.contact h3, .payment h3 {
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 20px; /* Increase font size for headings */
+    border-bottom: 2px solid #fff; /* Add bottom border for headings */
+    padding-bottom: 5px; /* Add padding to the bottom of headings */
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 14px; /* Adjust font size for labels */
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 10px; /* Increase padding for inputs */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px; /* Adjust font size for inputs */
+    color: #000000; /* Set the text color to white */
+    background-color: #f7f7f7; /* Set the background color to dark for contrast */
+}
+
+.formRow {
+    display: flex;
+    gap: 20px;
+}
+
+.totalBill {
+    width: 35%; /* Adjust width as needed */
+    background-color: #fff; /* Different background color for order summary */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners for the order summary */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+}
+
+.totalBill h2,
+.totalBill h6 {
+    margin-top: 0;
+    color: #333; /* Adjust heading color */
+    font-size: 18px; /* Increase font size for headings */
+    border-bottom: 2px solid #007bff; /* Add bottom border for headings */
+    padding-bottom: 5px; /* Add padding to the bottom of headings */
+}
+
+.totalBill ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 5px; /* Add margin to the bottom */
+    margin-bottom: 10px;
+}
+
+.totalBill li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust margin between items */
+    font-size: 14px; /* Adjust font size for list items */
+    color: #555; /* Adjust text color for list items */
+}
+
+
+.buttonContainer3 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 180px;
+}
+
+.navButton4 {
+    background-color: #605d5d; /* Customize button color */
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 420px;
+    margin-right: 160px;
+    transition: background-color 0.3s;
+}
+
+.navButton4:hover {
+    background-color: #0056b3;
+}
+
+.navButton4:active {
+    transform: scale(0.98); /* Slightly shrink button on click */
+}
+
+.navButton4:first-child {
+    margin-right: 115px; /* Adjust as needed */
+}
+
+.navButton4:last-child {
+    margin-left: 145px; /* Adjust as needed */
+}
+
+/* Customer Booking Information Display */
+
+.squareBox5 {
+    width: 740px; /* Set the width of the square */
+    max-height: 650px; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    background-color: #f4f4f4; /* Adjust the background color as needed */
+    position: absolute;
+    top: 400px; /* Center it vertically */
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Align items across the container */
+    align-items: flex-start;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+}
+
+.bookingDetails {
+    display: flex;
+    flex-direction: column;
+    width: 60%; /* Adjust width as needed */
+    margin-right: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+    background-color: #fff; /* Background color for sections */
+    padding: 15px; /* Add padding inside each section */
+    border-radius: 8px; /* Rounded corners for sections */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for sections */
+}
+
+.section h3 {
+    margin-bottom: 10px;
+    color: #333; /* Adjust heading color */
+    font-size: 18px; /* Increase font size for heading */
+    border-bottom: 2px solid #007bff; /* Add bottom border */
+    padding-bottom: 5px; /* Add padding to the bottom */
+}
+
+.section p {
+    margin-bottom: 5px; /* Add margin to the bottom of each paragraph */
+    color: #555; /* Adjust text color */
+    font-size: 16px; /* Adjust font size */
+    line-height: 1.5; /* Increase line height for better readability */
+    padding: 4px; /* Add padding to paragraphs for spacing */
+    background-color: #f9f9f9; /* Light background color for better contrast */
+    border-radius: 5px; /* Rounded corners for paragraphs */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for paragraphs */
+}
+
+.contactRow {
+    display: flex;
+    gap: 20px; /* Adjust the gap as needed */
+}
+
+.contactRow p {
+    flex: 1;
+}
+
+.billSummary {
+    width: 35%; /* Adjust width as needed */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for the summary */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for summary */
+}
+
+.billSummary h2 {
+    margin-bottom: 15px;
+    color: #333; /* Adjust heading color */
+    font-size: 18px; /* Increase font size for heading */
+    border-bottom: 2px solid #007bff; /* Add bottom border */
+    padding-bottom: 5px; /* Add padding to the bottom */
+}
+
+.billSummary ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px; /* Add margin to the bottom */
+}
+
+.billSummary li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between; /* Align items across the container */
+    color: #555; /* Adjust text color */
+}
+
+.fee {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555; /* Adjust text color */
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Adjust text color */
+}
+
+.cancelButton {
+    margin-top: 25px;
+    margin-left: 120px;
+    background-color: #5d5757; /* Customize button color */
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Admin Booking List Display */
+
+.backgroundbl {
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: url(/Bookingbackground.png);
+}
+
+.bookingPage1 {
+    background: url(/Bookingbackground.png);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%; /* Make sure it takes full width */
+    height: 100%; /* Make sure it takes full height */
+    background-repeat: no-repeat; /* Ensure no repeat of the background image */
+    background-size: 1000px; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the background image */
+    margin-top: -10px;
+}
+
+.containerbl {
+    width: 1500px;
+    height: 950px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(254, 254, 254, 0.7);
+    border-radius: 1px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.head {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.calendarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.squareBox6 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.calendar {
+    width: 100%;
+    border: none;
+    color: #000;
+    color-scheme: black;
+}
+
+.bookingListSection {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 400px; /* Adjust the max-height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.bookingItem {
+    border: 1px solid #ddd; /* Border around each booking item */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px; /* Padding inside the box */
+    margin-bottom: 16px; /* Spacing between booking items */
+    background-color: #fff; /* Clean white background */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Slight shadow for better separation */
+    color: #333; /* Darker text color for readability */
+}
+
+.bookingItem .section {
+    border-bottom: 1px solid #ddd; /* Border to separate sections */
+    padding-bottom: 12px; /* Space below the section */
+    margin-bottom: 12px; /* Space between sections */
+}
+
+.bookingItem .section:last-child {
+    border-bottom: none; /* Remove border from the last section */
+    margin-bottom: 0; /* Remove margin from the last section */
+}
+
+.bookingItem .section .header {
+    font-weight: bold; /* Bold text for headers */
+    margin-bottom: 6px; /* Space below the header */
+}
+
+.bookingItem .section .details {
+    display: flex; /* Flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 20px; /* Space between items */
+}
+
+.bookingItem .section .details div {
+    flex: 1; /* Allow items to grow and shrink */
+}
+
+.bookingItem .section .details div p {
+    margin: 0; /* Remove default margin */
+    padding: 4px 0; /* Vertical padding */
+    line-height: 1.5; /* Increase line height */
+}
+
+.bookingItem .section .message {
+    background-color: #f9f9f9; /* Light background for the message section */
+    border: 1px solid #ddd; /* Border around the message */
+    padding: 12px; /* Padding inside the message box */
+    border-radius: 4px; /* Rounded corners for the message box */
+}
+
+.bookingItem .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.bookingItem .confirmButton,
+.bookingItem .declineButton {
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.confirmButton, .declineButton {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirmButton {
+    background-color: #28a745;
+    color: white;
+}
+
+.declineButton {
+    background-color: #dc3545;
+    color: white;
+}
+
+.highlightedDate {
+    background-color: #e2c81c; /* Bright Pink */
+    color: #3409f27d; /* Optional, if you want to change the text color */
+    font-weight: bold;
+}
+
+.text {
+    color: #000;
+}

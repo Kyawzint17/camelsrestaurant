@@ -1,0 +1,301 @@
+.navBar {
+    padding: 10px 20px;
+    background-color: black;
+}
+
+.navContent {
+    display: flex;
+    align-items: center;
+   /* justify-content: space-between; */
+}
+
+.logoContainer {
+    margin-left: 150px; /* This pushes the logo to the right */
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 466px; /* Adjust spacing between image and button as needed */
+}
+
+.button {
+    margin-left: 10px; /* Adds space between buttons */
+    padding: 10px 20px;
+     /* background-color: #007bff; Blue background color */
+    color: whitesmoke; /* White text color */
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px; /* Font size */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 1px; /* Letter spacing */
+    
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.button:hover {
+    background-color: #ffd900c8 ; /* Darker blue on hover #0056b3 */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Adjust as necessary */
+    background-color: #0d131c;
+     /* Optional: Add a background color background: url(/front.jpg);*/
+}
+
+.imageContainer {
+    position:relative; /* Ensures the text can be positioned absolutely within this container */
+    width: 100%; /* Set width as per your image */
+    height: 900px; /* Set height as per your image */
+    overflow: hidden; /* Ensures that any overflow is hidden */
+    margin-bottom: 20px; /* Adds space between the image and the next section */
+}
+
+.imageContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, 0.8));
+    z-index: 1; /* Ensure the gradient is above the image but below the text */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 0; /* Ensure the image is below the gradient and text */
+}
+
+.header {
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white;
+    font-size: 70px; /* Adjust font size as needed */
+    /*  background: rgba(0, 0, 0, 0.5); Optional: Add a semi-transparent background for better text visibility */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.header {
+    position: absolute;
+    top: 36%;
+    left: 55%;
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white;
+    font-size: 80px; /* Adjust font size as needed */
+    /*  background: rgba(0, 0, 0, 0.5); Optional: Add a semi-transparent background for better text visibility */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.header1 {
+    position: absolute;
+    top: 44%;
+    left: 66%;
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white;
+    font-size: 55px; /* Adjust font size as needed */
+     /* background: rgba(0, 0, 0, 0.5); Optional: Add a semi-transparent background for better text visibility */
+    padding: 10px 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.head {
+    margin-top: 5px; /* Adjust the spacing between the image and the text */
+    font-size: 24px; /* Adjust font size as needed */
+    color: #f5f5f5; /* Adjust text color as needed */
+}
+
+.head2 {
+    margin-bottom: 10px; /* Adjust the spacing between the image and the text */
+    font-size: 24px; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust text color as needed */
+}
+
+.menuButton {
+    position: absolute;
+    top: 57%;
+    left: 48%;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding: 10px 50px;
+    font-size: 20px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the font bold */
+    color: rgb(101, 93, 93);
+    background-color: rgba(254, 254, 254, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2; /* Ensure the button is above the gradient and image */
+    text-align: center;
+}
+
+.bookTableButton {
+    position: absolute;
+    top: 57%;
+    left: 72%;
+    transform: translate(-50%, -50%); /* Center the button */
+    padding: 10px 50px;
+    font-size: 20px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the font bold */
+    color: rgb(101, 93, 93);
+    background-color: rgba(254, 254, 254, 0.8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2; /* Ensure the button is above the gradient and image */
+    text-align: center;
+}
+
+.line {
+    width: 100%; /* Adjust width as needed */
+    height: 2px; /* Adjust height as needed */
+    background-color: rgba(255, 255, 255, 0.494); /* Set the background color to black */
+    margin: 20px 0; /* Optional: Add some margin for spacing */
+}
+
+.line2 {
+    width: 100%; /* Adjust width as needed */
+    height: 2px; /* Adjust height as needed */
+    background-color: rgb(255, 255, 255); /* Set the background color to black */
+    margin: 20px 0; /* Optional: Add some margin for spacing */
+}
+
+.line3 {
+    width: 100%; /* Adjust width as needed */
+    height: 2px; /* Adjust height as needed */
+    /* background-color: rgb(255, 255, 255); Set the background color to black */
+    margin: 20px 0; /* Optional: Add some margin for spacing */
+}
+
+.mainEventContainer {
+    display: flex;
+    align-items: center;
+    background-color: rgb(252, 252, 252);
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    margin: 20px 0;
+    width: 52.5%;; /* Adjust as needed */
+}
+
+.eventImage {
+    width: 300px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    margin-right: 20px; /* Space between image and text */
+    object-fit: cover; /* Ensure the image covers the box */
+}
+
+.eventDetails {
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+}
+
+.eventTitle {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.eventDescription {
+    font-size: 18px;
+}
+
+.eventDate {
+    font-size: 16px;
+    color: #766868; /* Lighter color for the date */
+    margin-top: 10px;
+}
+
+.highlightImageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Optional: Add some margin for spacing */
+}
+
+.highlightImage {
+    max-width: 100%;
+    height: auto;
+}
+
+.videoContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between the videos */
+    margin-top: 20px; /* Space above the video container */
+}
+
+.videoPlaceholder {
+    width: 500px; /* Adjust width as needed */
+    height: 300px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd; /* Background color for placeholder */
+}
+
+.videoPlaceholderImage {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Bottom navbar css */
+
+.textContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 200px; /* Adjust spacing between image and button as needed */
+}
+
+.address {
+    font-size: 16px;
+    margin-right: 20px; /* Adjust spacing as needed */
+}
+
+.socialMedia {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between social media links */
+    margin-left: 300px;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.gmail, .ph {
+    font-size: 16px;
+    margin-bottom: 5px; /* Adjust spacing between lines */
+}
+
+.socialLinksContainer {
+    display: flex;
+    gap: 10px; /* Space between social media links */
+}
+
+.socialLink {
+    color: white;
+    text-decoration: none;
+}
+
+.socialLink:hover {
+    text-decoration: underline;
+}
