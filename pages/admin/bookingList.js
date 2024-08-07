@@ -104,6 +104,10 @@ export default function BookingList() {
                                             <div className={styles.message}>
                                                 <p>{booking.message}</p>
                                             </div>
+                                            <div className={styles.header}>Status Message</div>
+                                            <div className={styles.message}>
+                                                <p>Pending</p>
+                                            </div>
                                         </div>
                                         <div className={styles.buttonGroup}>
                                             <button className={styles.confirmButton}>Confirm</button>
