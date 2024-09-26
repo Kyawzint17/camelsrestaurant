@@ -16,29 +16,98 @@
 .buttonContainer {
     display: flex;
     align-items: center;
-    margin-left: 466px; /* Adjust spacing between image and button as needed */
+    margin-left: 200px; /* Adjust spacing between image and button as needed */
 }
 
 .button {
     margin-left: 10px; /* Adds space between buttons */
     padding: 10px 20px;
-     /* background-color: #007bff; Blue background color */
-    color: whitesmoke; /* White text color */
+    color: rgb(252, 252, 252); /* Initial text color */
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    font-size: 18px; /* Font size */
+    position: relative;
+    text-decoration: none; /* No underline initially */
+    font-size: 19.7px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px; /* Adjust as needed */
+    height: 2px; /* Adjust as needed */
+    background-color: #ffd900c8; /* Underline color */
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.button:hover::after {
+    transform: scaleX(1);
+}
+
+.role{
+    font-size: 1.2rem;          /* Slightly larger font size */
+    font-weight: bold;          /* Make the text bold */
+    color: #333;                /* Dark text color */
+    background-color: #f0f0f0d9;  /* Light gray background for contrast */
+    padding: 10px 15px;         /* Add some padding */
+    border-radius: 8px;         /* Rounded corners */
+    display: inline-block;      /* Keep the element inline but allow padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+    transition: background-color 0.3s ease;   /* Smooth hover effect*/
+    margin-left: 50px;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    margin-left: 40px;
+}
+
+.profileIcon {
+    margin-right: 10px; /* Adds space between the image and the text */
+}
+
+.lineIcon {
+    margin-right: 10px; /* Adds space between the image and the text */
+    margin-top: 1px;
+}
+
+.userText {
+    font-size: 13px; /* Adjust the font size as needed */
+    color: #ffffff; /* Change the color as needed */
+    font-weight: bold; /* Bold text */
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.logButton {
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    /* background-color: #007bff; Blue background color */
+    color: #ffffff; /* White text color */
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px; /* Font size */
     font-weight: bold; /* Bold text */
     text-transform: uppercase; /* Uppercase text */
     letter-spacing: 1px; /* Letter spacing */
-    
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
 }
 
-.button:hover {
-    background-color: #ffd900c8 ; /* Darker blue on hover #0056b3 */
+.logButton:hover {
+    color: #0d131c;
+    background-color: #efcd10 ; /* Darker blue on hover #0056b3 */
     transform: translateY(-2px); /* Slight lift on hover */
 }
+
+/* Admin Home Page */
 
 .mainSection {
     display: flex;
@@ -46,6 +115,7 @@
     align-items: center;
     width: 100%; /* Adjust as necessary */
     background-color: #0d131c;
+    background: url(/home_page.jpg) no-repeat center center;
      /* Optional: Add a background color background: url(/front.jpg);*/
 }
 
@@ -132,7 +202,7 @@
 .menuButton {
     position: absolute;
     top: 57%;
-    left: 48%;
+    left: 50%;
     transform: translate(-50%, -50%); /* Center the button */
     padding: 10px 50px;
     font-size: 20px; /* Adjust font size as needed */
@@ -149,7 +219,7 @@
 .bookTableButton {
     position: absolute;
     top: 57%;
-    left: 72%;
+    left: 71%;
     transform: translate(-50%, -50%); /* Center the button */
     padding: 10px 50px;
     font-size: 20px; /* Adjust font size as needed */
@@ -173,7 +243,7 @@
 .line2 {
     width: 100%; /* Adjust width as needed */
     height: 2px; /* Adjust height as needed */
-    background-color: rgb(255, 255, 255); /* Set the background color to black */
+    background-color: rgb(0, 0, 0); /* Set the background color to black */
     margin: 20px 0; /* Optional: Add some margin for spacing */
 }
 
@@ -187,12 +257,54 @@
 .mainEventContainer {
     display: flex;
     align-items: center;
-    background-color: rgb(252, 252, 252);
+    background-color: white;
     color: rgb(0, 0, 0);
     padding: 20px;
     margin: 20px 0;
     width: 52.5%;; /* Adjust as needed */
+    position: relative;
 }
+
+.eventContent {
+    text-align: center;
+    flex: 1;
+}
+
+.arrowButtonLeft, .arrowButtonRight {
+    background: rgba(75, 73, 73, 0); /* Light transparent background */
+    border: none;
+    font-size: 2.5rem; /* Slightly larger for emphasis */
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+    padding: 10px;
+    border-radius: 50%; /* Circular background */
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.arrowButtonLeft {
+    left: 10px;
+}
+
+.arrowButtonRight {
+    right: 20px;
+}
+
+/* Hover Effects */
+.arrowButtonLeft:hover, .arrowButtonRight:hover {
+    background: rgba(239, 205, 16, 0.8); /* Bright background on hover */
+    color: #ffffff; /* White arrow color */
+    transform: translateY(-50%) scale(1.1); /* Slight scale-up on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for emphasis */
+}
+
+.arrowButtonLeft:active, .arrowButtonRight:active {
+    transform: translateY(-50%) scale(0.95); /* Shrinks slightly when clicked */
+    background: #ffd900; /* Solid color on click */
+}
+
 
 .eventImage {
     width: 300px; /* Adjust width as needed */
@@ -238,22 +350,89 @@
     display: flex;
     justify-content: center;
     gap: 20px; /* Space between the videos */
-    margin-top: 20px; /* Space above the video container */
+    margin-top: 10px; /* Space above the video container */
 }
 
 .videoPlaceholder {
     width: 500px; /* Adjust width as needed */
-    height: 300px; /* Adjust height as needed */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ddd; /* Background color for placeholder */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #ffffff; /* White background for a clean look */
+    border: 1px solid #e0e0e0; /* Light border for definition */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 10px;
+     /* Margin margin: 20px 0; for spacing between elements */
+}
+
+.videoPlaceholder div {
+    margin-bottom: 15px; /* Space between text blocks */
+}
+
+.videoPlaceholder div:first-child {
+    font-size: 1.6em; /* Larger font for the title */
+    font-weight: bold; /* Bold title */
+    color: #333; /* Dark color for better contrast */
+}
+
+.videoPlaceholder div:nth-child(2) {
+    font-size: 1.1em; /* Standard font size for content */
+    color: #555; /* Medium color for content */
+    line-height: 1.7; /* Increased line height for readability */
+}
+
+.videoPlaceholder ul {
+    padding-left: 20px; /* Indent for list items */
+    list-style-type: none; /* Remove default bullets */
+}
+
+.videoPlaceholder ul li {
+    position: relative; /* Positioning for custom bullets */
+    margin-bottom: 10px; /* Space between list items */
+    padding-left: 25px; /* Space for custom bullets */
+    font-size: 1em; /* Standard font size for list items */
+    color: #444; /* Darker color for better contrast */
+}
+
+.videoPlaceholder ul li::before {
+    content: ''; /* Custom bullet */
+    position: absolute;
+    left: 0; /* Align to the left */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+    width: 8px; /* Bullet size */
+    height: 8px; /* Bullet size */
+    background-color: #007bff; /* Blue bullet */
+    border-radius: 50%; /* Round bullet */
+}
+
+.policyHeader {
+    font-size: 1.6em; /* Larger font for the header */
+    font-weight: bold; /* Bold header */
+    color: #333; /* Dark color for better contrast */
+    margin-bottom: 15px; /* Space below header */
+}
+
+.policyList {
+    padding-left: 20px; /* Indent for list items */
+    list-style-type: none; /* Remove default bullets */
+}
+
+.policyList li {
+    margin-bottom: 10px; /* Space between list items */
+    font-size: 1.1em; /* Standard font size for list items */
+    color: #555; /* Medium color for content */
+    line-height: 1.6; /* Increased line height for readability */
+}
+
+.policyList li strong {
+    color: #007bff; /* Highlight policy titles with a different color */
 }
 
 .videoPlaceholderImage {
     max-width: 100%;
     height: auto;
 }
+
 
 /* Bottom navbar css */
 

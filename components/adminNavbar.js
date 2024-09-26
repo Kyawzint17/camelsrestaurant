@@ -1,8 +1,41 @@
 import Link from "next/link";
 import styles from '../styles/admin.module.css';
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { auth } from '@/pages/lib/firebase'; // Import auth from your Firebase configuration
+import { signOut } from 'firebase/auth'; // Import the signOut function from Firebase
 
 const adminNavbar = () => {
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [userEmail, setUserEmail] = useState(''); // State to store the user's email
+    const [userName, setUserName] = useState('');   // State to store the user's name
+
+    useEffect(() => {
+        // Use onAuthStateChanged to wait for the authentication state to be restored
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                setUserEmail(user.email || ''); // Set the email or an empty string
+                setUserName(user.displayName || '');
+            } else {
+                setUserEmail(''); // Clear the email when the user is signed out
+                setUserName('');  // Clear the name when the user is signed out
+            }
+        });
+        return unsubscribe; // Clean up the listener when the component is unmounted
+    }, []);
+
+    const toggleDropdown = () => {
+        setDropdownVisible(!dropdownVisible);
+    };
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth); // Sign out the user
+            window.location.href = '/'; // Redirect to the home page after logout
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    };
 
     return (
         <nav className={styles.navBar}>
@@ -41,7 +74,18 @@ const adminNavbar = () => {
                         ABOUT US 
                     </div>
                     </Link>
-                                       
+                    <div className={styles.role}>
+                        Admin: {userName || 'Unknown User'} {/* Display the name or "Unknown User" */} 
+                    </div>
+                    <div className={styles.userInfo}>
+                        <Image src="/adminprofile.jpg" width={80} height={80} className={styles.profileIcon} onClick={toggleDropdown} />
+                        <div className={styles.dropdown}>
+                            {/* <div className={styles.userText}>{userEmail}</div> */}
+                            
+                            <div className={styles.logButton} onClick={handleLogout}>Log Out</div> 
+                        </div>
+                    
+                    </div>            
                 </div>
             </div>
         </nav>

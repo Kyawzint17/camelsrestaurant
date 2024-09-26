@@ -24,14 +24,14 @@ const customerBottomNavbar = () => {
                             </div>
                         </div>
                         <div className={styles.socialLinksContainer}>
-                            <Link href="https://www.facebook.com">
-                                <div className={styles.socialLink}>Facebook</div>
-                            </Link>
-                            <Link href="https://www.twitter.com">
-                                <div className={styles.socialLink}>Twitter</div>
+                            <Link href="https://www.facebook.com/profile.php?id=61556568038363">
+                                <Image src="/facebook.jpg" width={40} height={40} className={styles.profileIcon}/>
                             </Link>
                             <Link href="https://www.instagram.com">
-                                <div className={styles.socialLink}>Instagram</div>
+                                <Image src="/ig.jpg" width={40} height={40} className={styles.profileIcon}/>
+                            </Link>
+                            <Link href="https://www.twitter.com">
+                                <Image src="/line.png" width={40} height={40} className={styles.profileIcon}/>
                             </Link>
                         </div>
                     </div>

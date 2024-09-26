@@ -1,19 +1,156 @@
 import CustomerNavbar from "@/components/customerNavbar";
 import CustomerNavbarBottom from "@/components/customerBottomNavbar";
 import Image from "next/image";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@/styles/booking.module.css';
 import Link from "next/link";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { db } from "@/pages/lib/firebase";
+import { doc, setDoc, updateDoc, getDoc, deleteDoc } from "firebase/firestore"; 
+import { getAuth } from "firebase/auth"; 
+import { useRouter } from 'next/router';
 
 export default function bookingTable() {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
+    const router = useRouter();
 
+    useEffect(() => {
+        const fetchBookingData = async () => {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            
+            if (!user) {
+                console.error("No user is currently logged in.");
+                return;
+            }
+    
+            const email = user.email;
+            const existingBookingId = sessionStorage.getItem('bookingId');
+    
+            if (existingBookingId) {
+                const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'bookings', existingBookingId);
+                try {
+                    const bookingDoc = await getDoc(bookingRef);
+    
+                    if (bookingDoc.exists()) {
+                        const bookingData = bookingDoc.data();
+    
+                        // Check if the booking belongs to the current user
+                        if (bookingData.email === email) {
+                            // Check the booking status and reset if needed
+                            if (bookingData.bookingStatus === 'cancelled' || bookingData.bookingStatus === 'completed') {
+                                // Reset the booking data
+                                sessionStorage.removeItem('bookingId');
+                                setSelectedDate(null);
+                                setSelectedTime(null);
+                            } else {
+                                // Set existing data
+                                setSelectedDate(new Date(bookingData.date));
+                                setSelectedTime(bookingData.timeSlot);
+                            }
+                        } else {
+                            console.error("Booking does not belong to the current user.");
+                            sessionStorage.removeItem('bookingId'); // Remove invalid bookingId from sessionStorage
+                        }
+                    } else {
+                        console.error("No document found for the provided bookingId.");
+                        sessionStorage.removeItem('bookingId'); // Remove invalid bookingId from sessionStorage
+                    }
+                } catch (error) {
+                    console.error("Error fetching booking:", error);
+                }
+            }
+        };
+    
+        fetchBookingData();
+    }, []);
+    
+    
     const handleTimeSelect = (time) => {
         setSelectedTime(time);
     };
+
+    const handleNextClick = async () => {
+        if (selectedDate && selectedTime) {
+            try {
+                const auth = getAuth(); 
+                const user = auth.currentUser; 
+        
+                if (!user) {
+                    console.error("No user is currently logged in.");
+                    return;
+                }
+        
+                const email = user.email; 
+                const existingBookingId = sessionStorage.getItem('bookingId');
+        
+                // Convert date to local timezone format
+                const localDate = new Date(selectedDate);
+                const localDateString = localDate.toLocaleDateString('en-CA'); // 'en-CA' gives YYYY-MM-DD format
+        
+                if (existingBookingId) {
+                    const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'bookings', existingBookingId);
+                    const bookingDoc = await getDoc(bookingRef);
+    
+                    if (bookingDoc.exists()) {
+                        await updateDoc(bookingRef, {
+                            date: localDateString, 
+                            timeSlot: selectedTime,
+                        });
+                        console.log("Booking date and time updated successfully.");
+                    } else {
+                        console.error("No document found for the provided bookingId.");
+                        sessionStorage.removeItem('bookingId'); // Remove invalid bookingId from sessionStorage
+                    }
+                } else {
+                    // Create a new booking document with an auto-generated ID
+                    const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'bookings', Date.now().toString());
+                    await setDoc(bookingRef, {
+                        date: localDateString, 
+                        timeSlot: selectedTime,
+                        bookingStatus: 'Pending', 
+                        email: email,
+                    });
+                    sessionStorage.setItem('bookingId', bookingRef.id);
+                    console.log("Booking date and time uploaded successfully.");
+                }
+    
+                router.push('/booking/seatSelection');
+            } catch (error) {
+                console.error("Error creating or updating booking:", error);
+            }
+        } else {
+            alert("Please select both date and time before proceeding.");
+        }
+    };
+    
+    const handleCancelClick = async () => {
+        const existingBookingId = sessionStorage.getItem('bookingId');
+    
+        if (existingBookingId) {
+            try {
+                const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'bookings', existingBookingId);
+                await deleteDoc(bookingRef); // Delete the document from Firestore
+                console.log("Booking deleted successfully.");
+    
+                // Clear sessionStorage and reset state
+                sessionStorage.removeItem('bookingId');
+                setSelectedDate(null);
+                setSelectedTime(null);
+    
+                // Optionally, navigate back to the customer home page
+                console.log("Booking date and time deleted successfully.");
+                router.push('/customer/customerHome');
+            } catch (error) {
+                console.error("Error deleting booking:", error);
+            }
+        } else {
+            console.error("No booking found to delete.");
+        }
+    };
+    
 
     return (
         <>
@@ -29,8 +166,13 @@ export default function bookingTable() {
                                 dateFormat="MMMM d, yyyy"
                                 className={styles.datePicker}
                                 inline
+                                filterDate={(date) => {
+                                    const day = date.getDay();
+                                    // Disable Saturdays (6) and Sundays (0)
+                                    return day !== 0 && day !== 6;
+                                }}
+                                minDate={new Date()} 
                             />
-                           
                             <div className={styles.squareBox}>
                                 {selectedDate ? (
                                     <>
@@ -45,7 +187,6 @@ export default function bookingTable() {
                                                         </div>
                                                     )}
                                             </div>
-                                            
                                             <div className={styles.timeSections}>
                                                 <div className={styles.timeSection}>
                                                     <div className={styles.sectionTitle}>Morning</div>
@@ -77,12 +218,9 @@ export default function bookingTable() {
                             </div>
                             <div className={styles.buttonContainer}>
                                 <Link href={'/customer/customerHome'}>
-                                <button className={styles.navButton}>CANCEL</button>
+                                    <button className={styles.navButton} onClick={handleCancelClick}>CANCEL</button>
                                 </Link>
-                                <Link href={'/booking/seatSelection'}>
-                                <button className={styles.navButton}>NEXT</button>
-                                </Link>
-
+                                <button className={styles.navButton} onClick={handleNextClick}>NEXT</button>
                             </div>
                         </div>
                         

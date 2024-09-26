@@ -130,6 +130,17 @@
     background-color: #0056b3;
 }
 
+.timeButton.locked {
+    background-color: red; /* Color for locked button */
+    color: white; /* Text color for locked button */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+    border: 1px solid darkred; /* Optional: Add border to enhance appearance */
+}
+
+.timeButton:disabled {
+    opacity: 0.6; /* Optional: Make disabled buttons less opaque */
+}
+
 .displaySection {
     display: flex;
     justify-content: space-between;
@@ -228,8 +239,8 @@
 
 .imageContainer {
     flex: 1;
-    max-width: 60%;
-    margin-right: 10px;
+    max-width: 100%;
+    margin-top: -2px;
 }
 
 .imageContainer img {
@@ -237,16 +248,67 @@
     height: auto;
 }
 
+.timeAndDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+  }
+  
+  .timeAndDate div {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Text color */
+    margin-right: 10px;
+  }
+  
+  .timeAndDate span {
+    font-size: 18px;
+    color: #007bff; /* Blue color for the date and time */
+  }
+  
+  @media (max-width: 768px) {
+    .timeAndDate {
+      flex-direction: column;
+      padding: 10px;
+      font-size: 16px;
+    }
+  
+    .timeAndDate div {
+      margin-right: 0;
+    }
+  }
+
 .seatLayout {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
+}
+
+.seat.reserved {
+    background-color: red; /* Or any other color to indicate it's reserved */
+    cursor: not-allowed;
+}
+
+.peopleInputContainer {
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.peopleInput {
+    width: 100px;
+    padding: 5px;
+    margin-left: 10px;
 }
 
 .row {
     display: flex;
     justify-content: center;
+    margin-bottom: 1px;
 }
 
 .seat {
@@ -257,9 +319,11 @@
     padding: 10px 15px;
     margin: 0 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 11px;
+    font-weight: bold;
     transition: background-color 0.3s, transform 0.2s;
-    margin-top: 15px;
+    margin-top: 22px;
+    margin-right: 1px;
 }
 
 .seat:hover {
@@ -279,34 +343,11 @@
     cursor: not-allowed;
 }
 
-.numSeatsContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.numSeatsContainer label {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.numSeatsInput {
-    width: 60px;
-    padding: 5px;
-    font-size: 16px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 4px;
-    margin-left: 10px;
-}
-
 /* Container for seat status */
 .seatStatusContainer {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px; /* Adjust spacing as needed */
+     /* m argin-top: 1px; Adjust spacing as needed */
 }
 
 /* Individual status item */
@@ -376,6 +417,14 @@
     margin: 5px;
     font-size: 14px;
     white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.bookingInfo {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px; 
+    margin-left: 300px;
+    margin-bottom:10px;
 }
 
 .noSeats {
@@ -462,9 +511,15 @@
 .navButtonSeat:last-child {
     margin-left: 115px; /* Adjust as needed */
 }
-
-
+  
 /* Booking fees and menu preorder css*/
+
+.menuContainer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
 .squareBox2 {
     width: 500px; /* Set the width of the square */
@@ -570,12 +625,29 @@
 
 /* Menu Order Css */
 
+.menuContainer {
+    width: 1500px; /* Adjust the width as needed */
+    height: 750px; /* Adjust the height as needed */
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color: rgba(254, 254, 254, 0.7); /* Background color for the rectangle box */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 10px; /* Optional: Add padding inside the container */
+    position: absolute; /* Position the container relative to galleryPage */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    flex-direction: column;
+}
+
 .squareBox3 {
     width: 740px; /* Set the width of the square */
     height: 600px; /* Set the height of the square */
     background-color: #817b7b; /* Adjust the background color as needed */
     position: absolute;
     top: 370px; /* Center it vertically */
+    margin-right: 550px;
     transform: translateY(-50%); /* Adjust as needed */
     display: flex;
     flex-direction: row; /* Change to row to split the box into two sections */
@@ -588,8 +660,133 @@
     overflow-y: auto; /* Allow vertical scrolling */
 }
 
+.infoBox {
+    width: 500px; /* Set the width of the square */
+    height: 600px; /* Set the height of the square */
+    background-color: #817b7b; /* Adjust the background color as needed */
+    position: absolute;
+    top: 370px; /* Center it vertically */
+    margin-left: 800px;
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: row; /* Change to row to split the box into two sections */
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.infoDisplay {
+    width: 100%;
+    background-color: #fff; /* Different background color for order summary */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners for the order summary */
+}
+
+.infoDisplay h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.infoDisplay h3 {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.infoDisplay p {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.dateTimeContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dateBox,
+.timeBox {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 0 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.dateBox h3,
+.timeBox h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.detailsContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f4f4f9;
+    border: 1px solid #e0e0e5;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.detailsItem {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.detailsItem:hover {
+    transform: scale(1.02);
+}
+
+.detailsIcon {
+    font-size: 1.5rem;
+    color: #4a90e2;
+    margin-right: 12px;
+}
+
+.detailsText {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.detailsText span {
+    color: #555;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .detailsContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.feeInfo {
+    margin-top: 15px;
+}
+
 .menuList {
-    width: 50%;
+    width: 55.2%;
     max-height: 100%; /* Ensure the menu list height does not exceed the container */
     overflow-y: auto; /* Allow vertical scrolling if the content exceeds the height */
 }
@@ -605,14 +802,14 @@
 }
 
 .menuDetails {
-    margin-left: 10px;
+    margin-bottom: 15px;
     color: white;
     font-size: 14px;
-    margin-left: 35px;
+    margin-left: 20px;
 }
 
 .orderSummary {
-    width: 45%;
+    width: 44%;
     background-color: #fff; /* Different background color for order summary */
     padding: 10px;
     border-radius: 5px; /* Rounded corners for the order summary */
@@ -694,7 +891,7 @@
 
 .buttonContainer2 {
     display: flex;
-    justify-content: space-between;
+     /* justify-content: space-between; */
     width: 100%;
     margin-top: 180px;
 }
@@ -703,12 +900,12 @@
     background-color: #605d5d; /* Customize button color */
     color: white;
     border: none;
-    padding: 8px 20px;
+    padding: 12px 30px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 420px;
-    margin-right: 160px;
+    margin-top: 410px;
+    margin-right: 20px; /* Reduce this value */
     transition: background-color 0.3s;
 }
 
@@ -721,17 +918,34 @@
 }
 
 .navButton3:first-child {
-    margin-right: 115px; /* Adjust as needed */
+    margin-right: 10px; /* Reduce margin to bring buttons closer */
 }
 
 .navButton3:last-child {
-    margin-left: 115px; /* Adjust as needed */
+    margin-left: 400px; /* Remove extra left margin */
+    margin-right: 0; /* Remove right margin to align closer */
 }
 
 /* PaymentForm Css */
 
+.paymentContainer {
+    width: 1500px; /* Adjust the width as needed */
+    height: 750px; /* Adjust the height as needed */
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color: rgba(254, 254, 254, 0.7); /* Background color for the rectangle box */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 10px; /* Optional: Add padding inside the container */
+    position: absolute; /* Position the container relative to galleryPage */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    flex-direction: column;
+}
+
 .squareBox4 {
-    width: 740px; /* Set the width of the square */
+    width: 1000px; /* Set the width of the square */
     height: 600px; /* Set the height of the square */
     background-color: #817b7b; /* Adjust the background color as needed */
     position: absolute;
@@ -768,6 +982,37 @@
     padding-bottom: 5px; /* Add padding to the bottom of headings */
 }
 
+.pformGroup {
+    margin-bottom: 15px;
+}
+
+.pformGroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 14px; /* Adjust font size for labels */
+}
+
+.pformGroup input {
+    width: 100%;
+    padding: 10px; /* Increase padding for inputs */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px; /* Adjust font size for inputs */
+    color: #000000; /* Set the text color to white */
+    background-color: #f7f7f7; /* Set the background color to dark for contrast */
+}
+
+.pformGroup label{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.pformRow {
+    display: flex;
+    gap: 20px;
+}
+
 .formGroup {
     margin-bottom: 15px;
 }
@@ -789,13 +1034,38 @@
     background-color: #f7f7f7; /* Set the background color to dark for contrast */
 }
 
+.formGroup label{
+    color: #000;
+    font-weight: bold;
+}
+
 .formRow {
     display: flex;
     gap: 20px;
 }
 
+.qrCodeWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.qrCodeWrapper img {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.qrCodeWrapper p {
+    color: rgb(0, 0, 0);
+    margin-top: 1rem; /* Optional: Adds some space above the paragraph */
+}
+
 .totalBill {
-    width: 35%; /* Adjust width as needed */
+    width: 55%; /* Adjust width as needed */
     background-color: #fff; /* Different background color for order summary */
     padding: 20px;
     border-radius: 10px; /* Rounded corners for the order summary */
@@ -808,6 +1078,13 @@
     color: #333; /* Adjust heading color */
     font-size: 18px; /* Increase font size for headings */
     border-bottom: 2px solid #007bff; /* Add bottom border for headings */
+    padding-bottom: 5px; /* Add padding to the bottom of headings */
+}
+
+.totalBill h3 {
+    margin-top: 0;
+    color: #333; /* Adjust heading color */
+    font-size: 17.8px; /* Increase font size for headings */
     padding-bottom: 5px; /* Add padding to the bottom of headings */
 }
 
@@ -839,12 +1116,12 @@
     background-color: #605d5d; /* Customize button color */
     color: white;
     border: none;
-    padding: 8px 20px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     margin-top: 420px;
-    margin-right: 160px;
+    margin-right: 500px;
     transition: background-color 0.3s;
 }
 
@@ -857,14 +1134,30 @@
 }
 
 .navButton4:first-child {
-    margin-right: 115px; /* Adjust as needed */
+    margin-right: 10px; /* Adjust as needed */
 }
 
 .navButton4:last-child {
-    margin-left: 145px; /* Adjust as needed */
+    margin-left: 440px; /* Adjust as needed */
 }
 
 /* Customer Booking Information Display */
+
+.bookingInfoContainer {
+    width: 1500px; /* Adjust the width as needed */
+    height: 750px; /* Adjust the height as needed */
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color: rgba(254, 254, 254, 0.7); /* Background color for the rectangle box */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    padding: 10px; /* Optional: Add padding inside the container */
+    position: absolute; /* Position the container relative to galleryPage */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    flex-direction: column;
+}
 
 .squareBox5 {
     width: 740px; /* Set the width of the square */
@@ -873,6 +1166,7 @@
     background-color: #f4f4f4; /* Adjust the background color as needed */
     position: absolute;
     top: 400px; /* Center it vertically */
+    left: 100px;
     transform: translateY(-50%); /* Adjust as needed */
     display: flex;
     flex-direction: row;
@@ -883,6 +1177,50 @@
     padding: 20px; /* Add padding inside the square */
     border-radius: 10px; /* Optional: Add rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+}
+
+.policySquare {
+    width: 500px; /* Set the width of the square */
+    max-height: 650px; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    background-color: #f4f4f4; /* Adjust the background color as needed */
+    position: absolute;
+    top: 350px; /* Center it vertically */
+    left: 900px;
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align items across the container */
+    align-items: flex-start;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+    
+}
+
+.policyHeader {
+    font-size: 1.6em; /* Larger font for the header */
+    font-weight: bold; /* Bold header */
+    color: #333; /* Dark color for better contrast */
+    margin-bottom: 15px; /* Space below header */
+}
+
+.policyList {
+    padding-left: 20px; /* Indent for list items */
+    list-style-type: none; /* Remove default bullets */
+}
+
+.policyList li {
+    margin-bottom: 10px; /* Space between list items */
+    font-size: 1.1em; /* Standard font size for list items */
+    color: #555; /* Medium color for content */
+    line-height: 1.6; /* Increased line height for readability */
+}
+
+.policyList li strong {
+    color: #007bff; /* Highlight policy titles with a different color */
 }
 
 .bookingDetails {
@@ -944,6 +1282,12 @@
     padding-bottom: 5px; /* Add padding to the bottom */
 }
 
+.billSummary h3 {
+    color: #333; /* Adjust heading color */
+    font-size: 18px; /* Increase font size for headings */
+    padding-bottom: 5px; /* Add padding to the bottom of headings */
+}
+
 .billSummary ul {
     list-style-type: none;
     padding: 0;
@@ -961,6 +1305,7 @@
     margin-bottom: 10px;
     font-size: 16px;
     color: #555; /* Adjust text color */
+    font-weight: bold;
 }
 
 .total {
@@ -972,7 +1317,7 @@
 .cancelButton {
     margin-top: 25px;
     margin-left: 120px;
-    background-color: #5d5757; /* Customize button color */
+    background-color: #f10808; /* Customize button color */
     color: white;
     border: none;
     padding: 8px 10px;
@@ -980,6 +1325,121 @@
     cursor: pointer;
     font-size: 14px;
 }
+
+.cancelmodal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: flex; /* Use flexbox to center the modal */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Make sure it appears above other content */
+    opacity: 1; /* Ensure the modal is fully visible */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.cancelmodalContent {
+    background-color: white; /* Background color for the modal content */
+    color: #000;
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the modal */
+    width: 300px; /* Set a width for the modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    text-align: center; /* Center align text */
+}
+
+.cancelmodalContent h3 {
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.modalButtons {
+    display: flex; /* Use flexbox for button layout */
+    justify-content: space-between; /* Space buttons evenly */
+}
+
+.cancelconfirmButton,
+.noButton {
+    padding: 10px 20px; /* Padding inside buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners for buttons */
+    cursor: pointer; /* Show pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.cancelconfirmButton {
+    background-color: #f44336; /* Red background for confirmation */
+    color: white; /* White text */
+}
+
+.cancelconfirmButton:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+.noButton {
+    background-color: #4caf50; /* Green background for cancellation */
+    color: white; /* White text */
+}
+
+.noButton:hover {
+    background-color: #388e3c; /* Darker green on hover */
+}
+
+.cmodal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.cmodalContent {
+    background: white;
+    color: #000;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.ccloseButton {
+    float: right; /* Moves the button to the right */
+    margin-top: 10px;
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.ccloseButton:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+.viewButton {
+    margin-left: 10px;
+    background-color: #2196F3; /* Blue background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.viewButton:hover {
+    background-color: #1976D2; /* Darker blue on hover */
+}
+
 
 /* Admin Booking List Display */
 
@@ -1063,6 +1523,45 @@
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
+.filterSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.filterSection label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 15px;
+    color: #333;
+}
+
+.statusFilter {
+    padding: 8px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    background-color: #fff;
+    color: #000;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.statusFilter:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.filterSection:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 .bookingItem {
     border: 1px solid #ddd; /* Border around each booking item */
     border-radius: 8px; /* Rounded corners */
@@ -1140,6 +1639,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
+/* <button className={styles.declineButton}>Decline</button> */
 
 .confirmButton {
     background-color: #28a745;
@@ -1152,11 +1652,91 @@
 }
 
 .highlightedDate {
-    background-color: #e2c81c; /* Bright Pink */
-    color: #3409f27d; /* Optional, if you want to change the text color */
+    background: #e2c81c; /* Bright Yellow */
+    color: #3409f2; /* Change text color */
     font-weight: bold;
+    border-radius: 50%; /* Optional: to make it circular */
 }
+
 
 .text {
     color: #000;
 }
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: white;
+    color: #000;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.inputContainer {
+    margin: 15px 0;
+}
+
+.inputContainer label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.amountInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.amountInput:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.imageLink {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.imageModalContent {
+    flex-direction: column; /* Stack items in a column */
+    width: 80%; /* Adjust as needed for modal size */
+    max-width: 400px; /* Set a max width for larger screens */
+    padding: 20px; /* Add some padding */
+    background-color: white; /* Background color for contrast */
+    border-radius: 8px; /* Rounded corners for aesthetics */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    text-align: center; /* Center text and image */
+}
+
+.receiptImage {
+    width: 100%; /* Take full width of modal */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Adjusts how the image is resized */
+}
+

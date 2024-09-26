@@ -1,82 +1,31 @@
 import CustomerNavbar from "@/components/customerNavbar";
 import CustomerNavbarBottom from "@/components/customerBottomNavbar";
 import Image from "next/image";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@/styles/menu.module.css';
-
-// Example menu items
-const menuItems = [
-    {
-        name: 'Grilled Chicken',
-        description: 'Juicy grilled chicken served with steamed vegetables.',
-        price: '$12.99',
-        category: 'Main',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Caesar Salad',
-        description: 'Fresh romaine lettuce with Caesar dressing.',
-        price: '$8.99',
-        category: 'Salad',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Chocolate Cake',
-        description: 'Rich chocolate cake with a gooey center.',
-        price: '$6.99',
-        category: 'Dessert',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Fried1',
-        description: 'Refreshing lemonade made with fresh lemons.',
-        price: '$3.99',
-        category: 'Fried Food',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Lemonade2',
-        description: 'Refreshing lemonade made with fresh lemons.',
-        price: '$3.99',
-        category: 'Drinks',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Lemonade3',
-        description: 'Refreshing lemonade made with fresh lemons.',
-        price: '$3.99',
-        category: 'Drinks',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Lemonade4',
-        description: 'Refreshing lemonade made with fresh lemons.',
-        price: '$3.99',
-        category: 'Drinks',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Lemonade5',
-        description: 'Refreshing lemonade made with fresh lemons.',
-        price: '$3.99',
-        category: 'Drinks',
-        image: '/bukhari.png',
-    },
-    {
-        name: 'Lemonade6',
-        description: 'Refreshing lemonade made with fresh lemons.',
-        price: '$3.99',
-        category: 'Drinks',
-        image: '/bukhari.png',
-    },
-    
-    // Add more items as needed
-];
+import { db, storage } from "@/pages/lib/firebase"; // Ensure this path is correct
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 export default function customerMenu() {
+    const [menuItems, setMenuItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
 
     let categories = ["All", "Main", "Fried Food", "Salad", "Dessert", "Drinks"];
+
+    useEffect(() => {
+        // Fetch menu items from Firestore
+        const fetchMenuItems = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'camels', 'camelsrestaurant', 'menu'));
+                const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setMenuItems(items);
+            } catch (error) {
+                console.error("Error fetching menu items: ", error);
+            }
+        };
+
+        fetchMenuItems();
+    }, []);
 
     const filteredItems = selectedCategory === 'All' 
         ? menuItems 
@@ -89,6 +38,7 @@ export default function customerMenu() {
                 <div className={styles.imageContainer}>
                     <Image src="/Food.png" alt="Logo" layout="fill" objectFit="cover" className={styles.image} />
                     <div className={styles.header}>MENU</div>
+                    <div className={styles.subText}>Explore Our Delicious Traditional Dishes</div>
                 </div>
                 <div className={styles.menuBox}>
                     <div className={styles.categoriesBox}>
@@ -105,11 +55,11 @@ export default function customerMenu() {
                     <div className={styles.foodContainer}>
                         {filteredItems.map((item) => (
                             <div key={item.name} className={styles.menuItem}>
-                                <Image src={item.image} alt={item.name} width={150} height={100} />
+                                <Image src={item.imageUrl} alt={item.name} width={150} height={100} />
                                 <div className={styles.menuItemDetails}>
-                                    <h3>{item.name}</h3>
+                                    <h3>{item.title}</h3>
                                     <p>{item.description}</p>
-                                    <p>{item.price}</p>
+                                    <p>฿{item.price}</p>
                                 </div>
                             </div>
                         ))}

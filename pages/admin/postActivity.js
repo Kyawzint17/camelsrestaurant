@@ -1,40 +1,115 @@
+import { useState } from "react";
+import { db, storage } from "@/pages/lib/firebase"; // Make sure to update the import path accordingly
+import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AdminNavbar from "@/components/adminNavbar";
 import AdminNavbarBottom from "@/components/adminBottomNavbar";
 import styles from '@/styles/postactivity.module.css';
 import Link from "next/link";
-
-
-
-
+import { v4 as uuidv4 } from 'uuid'; // To generate unique IDs
 
 export default function PostActivity() {
-    return (
+    const [title, setTitle] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');
 
-    <>
-        <AdminNavbar />
-        <div className={styles['home-page']}>
-            <div className={styles['cover']}>
-                <div className={styles['container']}>CREATE POST</div>
-                <div className={styles['container2']}>
-                    <div className={styles['container-pic']}></div>
-                    <form className={styles['container-text']}>
-                        <label className={styles['text']}> Title</label>
-                        <input className={styles['input']}></input>
-                        <label className={styles['text']}> Date and Time</label>
-                        <input className={styles['input']}></input>
-                        <label className={styles['text']}> description</label>
-                        <input className={styles['input']}></input>
-                        <button className={styles['create-button']}>create</button>
-                        <Link href={'/admin/adminActivity'}>
-                        <button className={styles['create-button']}>back</button>
-                        </Link>
-                        
-                    </form>
+    const handleImageChange = (e) => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            // Upload image to Firebase Storage
+            const imageRef = ref(storage, `activity/${image.name}`);
+            await uploadBytes(imageRef, image);
+            const url = await getDownloadURL(imageRef);
+            setImageUrl(url);
+
+            // Generate a unique document ID
+            const activityId = uuidv4();
+
+            // Add activity post to Firestore
+            await setDoc(doc(db, 'camels', 'camelsrestaurant', 'activities', activityId), {
+                title,
+                startDate,
+                endDate,
+                description,
+                imageUrl: url,
+            });
+
+            // Reset form
+            setTitle('');
+            setStartDate('');
+            setEndDate('');
+            setDescription('');
+            setImage(null);
+            setImageUrl('');
+
+            alert("Post created successfully!");
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("Error creating post: " + error.message);
+        }
+    };
+
+    return (
+        <>
+            <AdminNavbar />
+            <div className={styles['home-page']}>
+                <div className={styles['cover']}> 
+                    <div className={styles['container2']}>
+                        <div className={styles['container']}>CREATE POST</div>
+                        <div className={styles['container-pic']}>
+                            <label className={styles['btext']}>Image Upload</label>
+                            <input type="file" className={styles['btext2']} onChange={handleImageChange} />
+                        </div>
+                        <form className={styles['container-text']} onSubmit={handleSubmit}>
+                            <label className={styles['text']}>Title</label>
+                            <input 
+                                className={styles['input']} 
+                                value={title} 
+                                onChange={(e) => setTitle(e.target.value)} 
+                            />
+                            <label className={styles['text']}>Start Date</label>
+                            <input 
+                                type="date" 
+                                className={styles['input']} 
+                                value={startDate} 
+                                onChange={(e) => setStartDate(e.target.value)} 
+                            />
+                            <label className={styles['text']}>End Date</label>
+                            <input 
+                                type="date" 
+                                className={styles['input']} 
+                                value={endDate} 
+                                onChange={(e) => setEndDate(e.target.value)} 
+                            />
+                            <label className={styles['text']}>Description</label>
+                            <textarea 
+                                className={styles['input']} 
+                                rows="4" 
+                                cols="30" 
+                                value={description} 
+                                onChange={(e) => setDescription(e.target.value)} 
+                            ></textarea>
+                            <div className={styles['button-container']}>
+                                <button type="submit" className={styles['create-button']}>Create</button>
+                                <Link href={'/admin/adminActivity'}>
+                                    <button type="button" className={styles['create-button']}>Back</button>
+                                </Link>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <AdminNavbarBottom /> 
-    </>
-    
+            <AdminNavbarBottom /> 
+        </>
     );
 }

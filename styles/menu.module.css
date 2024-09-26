@@ -47,43 +47,67 @@
     font-weight: bold;
 }
 
-.menuBox {
-    display: flex;
-    flex-direction: column; /* Arrange post boxes in a column*/
-    justify-content: center; /* Center the post boxes horizontally */
-    align-items: center; /* Center the content vertically */
-    background-color: rgba(240, 240, 240, 0.9); /* Set background color */
-    padding: 20px; /* Optional: Add padding around the container */
-    width: 100%;
-    height: 100%;
-   
-    /* border-radius: 10px;  Optional: Add rounded corners */   
+.subText {
+    position: absolute;
+    top: 57%;
+    left: 66%;
+    transform: translate(-50%, -40%); /* Center the text */
+    color: #fff;
+    font-size: 28px; /* Slightly smaller than header */
+    background: rgba(0, 0, 0, 0.6); /* Add semi-transparent background */
+    padding: 10px 20px; /* Add padding for better spacing */
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500; /* Make the font weight medium for readability */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); /* Add a lighter shadow */
+    line-height: 1.6; /* Increase line height for better readability */
+    max-width: 700px; /* Optional: Limit the width of the text */
+    letter-spacing: 1px;
 }
 
-.categoriesBox{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+.menuBox {
+    display: flex;
+    flex-direction: column; /* Arrange content in a column */
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.904); /* Dark overlay */
+    padding: 20px;
+    width: 100%;
+    min-height: 100vh; /* Ensure the height covers the viewport */
+    background: url('../public/menu_page.jpg') no-repeat center center;
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.categoriesBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    padding: 10px;
+    margin-bottom: 20px; /* Space between categories and the food items */
 }
 
 .categoriesBox button {
-  background-color: #9A7B4F; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 10px;
-  cursor: pointer;
-  border-radius: 5px;
+    background-color: #9A7B4F; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .foodContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 20px; /* Space below categories box */
+    width: 100%;
 }
 
 .menuItem {
@@ -93,6 +117,13 @@
     width: 200px;
     text-align: center;
     background-color: #9A7B4F;
+}
+
+.menuItem img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px; /* Optional for styling */
 }
 
 .menuItemDetails {
@@ -122,4 +153,105 @@
     cursor: pointer;
     z-index: 2; /* Ensure the button is above the gradient and image */
     text-align: center;
+}
+
+.deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 40%;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 10px;
+    margin-left: 150px;
+}
+
+.deleteButton:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: red;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.deleteButton:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background for better focus */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for opening/closing */
+}
+
+.modalContent {
+    background: #2c2c2c; /* Dark grey background */
+    padding: 30px; /* Increased padding for a better look */
+    border-radius: 10px; /* Slightly more rounded corners */
+    text-align: center;
+    max-width: 500px; /* Slightly wider modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for a 3D effect */
+    animation: slideIn 0.4s ease-out; /* Slide-in animation for the modal */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.confirmButton, .cancelButton {
+    padding: 12px 25px; /* Increased padding for better appearance */
+    border-radius: 25px; /* Fully rounded corners for buttons */
+    cursor: pointer;
+    margin: 15px 10px 0 10px; /* Added margin at the top for spacing */
+    font-size: 16px; /* Increased font size */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
+}
+
+.confirmButton {
+    background-color: #28a745; /* Green color for confirm button */
+    color: white;
+    border: none;
+}
+
+.confirmButton:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slight scale up on hover */
+}
+
+.confirmButton:active {
+    background-color: #1e7e34; /* Even darker green on click */
+    transform: scale(0.98); /* Slight scale down on click */
+}
+
+.cancelButton {
+    background-color: #dc3545; /* Red color for cancel button */
+    color: white;
+    border: none;
+}
+
+.cancelButton:hover {
+    background-color: #c82333; /* Darker red on hover */
+    transform: scale(1.05); /* Slight scale up on hover */
+}
+
+.cancelButton:active {
+    background-color: #bd2130; /* Even darker red on click */
+    transform: scale(0.98); /* Slight scale down on click */
 }
