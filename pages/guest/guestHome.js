@@ -3,6 +3,7 @@ import CustomerNavbarBottom from "@/components/customerBottomNavbar";
 import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import styles from '@/styles/customer.module.css';
+import style from '@/styles/menu.module.css';
 import Link from "next/link";
 import { db } from "@/pages/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -52,7 +53,7 @@ export default function customerHome() {
                     <Image src="/homebackgr0und.jpg" alt="Logo" layout="fill" objectFit="cover" className={styles.image} />
                     <div className={styles.header}>Welcome To Camels</div>
                     <div className={styles.header1}>Cafe & Restaurant</div>
-                    
+                    <div className={style.subText2}>Please log in to reserve your seat and enjoy a seamless booking experience!</div>
                 </div>
 
                 <div className={styles.head}>ANNOUNCEMENT</div>

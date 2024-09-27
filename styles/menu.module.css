@@ -65,6 +65,25 @@
     letter-spacing: 1px;
 }
 
+.subText2 {
+    position: absolute;
+    top: 57%;
+    left: 66%;
+    transform: translate(-50%, -40%); /* Center the text */
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 28px; /* Slightly smaller than header */
+    background: #ffffffca; /* Add semi-transparent background */
+    padding: 10px 20px; /* Add padding for better spacing */
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500; /* Make the font weight medium for readability */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); /* Add a lighter shadow */
+    line-height: 1.6; /* Increase line height for better readability */
+    max-width: 700px; /* Optional: Limit the width of the text */
+    letter-spacing: 1px;
+}
+
 .menuBox {
     display: flex;
     flex-direction: column; /* Arrange content in a column */
