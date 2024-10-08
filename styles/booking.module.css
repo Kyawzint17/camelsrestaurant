@@ -1570,6 +1570,20 @@
     color-scheme: black !important;
 }
 
+.react-calendar {
+    background-color: black !important; /* Set calendar background to black */
+    color: white !important; /* Set text color to white */
+}
+
+.react-calendar__tile {
+    background-color: black !important; /* Set tile background to black */
+    color: white !important; /* Set tile text color to white */
+}
+
+.react-calendar__month-view__weekdays {
+    color: white !important; /* Set weekdays color to white */
+}
+
 .bookingListSection {
     width: 100%;
     background-color: #fff;
