@@ -1566,8 +1566,8 @@
 .calendar {
     width: 100%;
     border: none;
-    color: #000;
-    color-scheme: black;
+    color: #000 !important;
+    color-scheme: black !important;
 }
 
 .bookingListSection {
