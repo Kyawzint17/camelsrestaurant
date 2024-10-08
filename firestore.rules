@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Rules for camelsrestaurant document
+    match /camels/{document=**} {
+
+      // Allow read and write access to all menu items within camelsrestaurant/menu
+      match /camelsrestaurant/menu/{menuId} {
+          allow read: if true; // Allow read access to everyone (public)
+          allow write: if request.auth != null; // Only allow authenticated users to write
+      }
+
+      match /camelsrestaurant/activities/{activityId} {
+          allow read: if true; // Allow read access to everyone (public)
+          allow write: if request.auth != null; // Only allow authenticated users to write
+      }
+
+      // Allow read and write access to all bookings within camelsrestaurant/bookings
+      match /camelsrestaurant/bookings/{bookingId} {
+        allow read, write: if request.auth != null; // Only allow authenticated users
+      }
+      
+     // Allow read and write access to all reservedSeats within camelsrestaurant/reservedSeats
+      match /camelsrestaurant/reservedSeats/{reservedSeat} {
+        allow read, write: if request.auth != null; // Only allow authenticated users
+      }
+      
+      match /camelsrestaurant/seats/{seat} {
+        allow read, write: if request.auth != null; // Only allow authenticated users
+      }
+      
+    }
+  }
+}
