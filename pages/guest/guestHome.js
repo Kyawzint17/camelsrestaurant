@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from '@/styles/customer.module.css';
 import style from '@/styles/menu.module.css';
 import Link from "next/link";
-import { db } from "@/pages/lib/firebase";
+import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 export default function customerHome() {

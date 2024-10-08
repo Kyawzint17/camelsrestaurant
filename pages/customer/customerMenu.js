@@ -3,7 +3,7 @@ import CustomerNavbarBottom from "@/components/customerBottomNavbar";
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import styles from '@/styles/menu.module.css';
-import { db, storage } from "@/pages/lib/firebase"; // Ensure this path is correct
+import { db, storage } from "@/lib/firebase"; // Ensure this path is correct
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 export default function customerMenu() {

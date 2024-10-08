@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '@/styles/booking.module.css';
 import Link from "next/link";
-import { db, storage } from "@/pages/lib/firebase"; // Ensure this path is correct
+import { db, storage } from "@/lib/firebase"; // Ensure this path is correct
 import { collection, getDocs, deleteDoc, doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 

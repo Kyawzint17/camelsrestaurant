@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { format, startOfDay, isSameDay, parseISO } from 'date-fns';
-import { db, storage} from "@/pages/lib/firebase"; // Ensure this path is correct
+import { db, storage} from "@/lib/firebase"; // Ensure this path is correct
 import { collection, getDocs, query, where, getDoc, doc, updateDoc  } from "firebase/firestore";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 

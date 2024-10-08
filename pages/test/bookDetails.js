@@ -3,7 +3,7 @@ import CustomerNavbar from "@/components/customerNavbar";
 import CustomerNavbarBottom from "@/components/customerBottomNavbar";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { db } from "@/pages/lib/firebase"; // Ensure this path is correct
+import { db } from "@/lib/firebase"; // Ensure this path is correct
 import { doc, getDoc } from "firebase/firestore";
 import styles from '@/styles/booking.module.css'; // Create your CSS module
 

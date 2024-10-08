@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { auth, signInWithGoogle } from '@/pages/lib/firebase'; 
+import { auth, signInWithGoogle } from '@/lib/firebase'; 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";

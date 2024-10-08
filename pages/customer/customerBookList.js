@@ -3,7 +3,7 @@ import CustomerNavbarBottom from "@/components/customerBottomNavbar";
 import Image from "next/image";
 import styles from '@/styles/booking.module.css';
 import React, { useState, useEffect } from 'react';
-import { db, storage } from "@/pages/lib/firebase"; // Ensure this path is correct
+import { db, storage } from "@/lib/firebase"; // Ensure this path is correct
 import { collection, getDocs, query, where, getDoc, doc,  updateDoc, deleteDoc  } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";

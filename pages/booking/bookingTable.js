@@ -6,7 +6,7 @@ import styles from '@/styles/booking.module.css';
 import Link from "next/link";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { db } from "@/pages/lib/firebase";
+import { db } from "@/lib/firebase";
 import { doc, setDoc, updateDoc, getDoc, deleteDoc } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth"; 
 import { useRouter } from 'next/router';

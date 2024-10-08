@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from '../styles/customer.module.css';
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { auth } from '@/pages/lib/firebase'; // Import auth from your Firebase configuration
+import { auth } from '@/lib/firebase'; // Import auth from your Firebase configuration
 import { signOut } from 'firebase/auth'; // Import the signOut function from Firebase
 
 const CustomerNavbar = () => {

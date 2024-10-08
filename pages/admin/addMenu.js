@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { db, storage } from "@/pages/lib/firebase"; // Make sure to update the import path accordingly
+import { db, storage } from "@/lib/firebase"; // Make sure to update the import path accordingly
 import { collection, doc, addDoc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Style from '@/styles/addmenu.module.css';

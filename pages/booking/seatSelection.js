@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '@/styles/booking.module.css';
 import Link from "next/link";
 import Image from "next/image";
-import { db } from "@/pages/lib/firebase";
+import { db } from "@/lib/firebase";
 import { collection, doc, setDoc, query, where, getDocs, updateDoc, getDoc, deleteDoc, serverTimestamp } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth"; 
 import { useRouter } from 'next/router';

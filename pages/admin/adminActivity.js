@@ -4,7 +4,7 @@ import styles from '@/styles/activity.module.css';
 import AdminNavbarBottom from "@/components/adminBottomNavbar";
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
-import { db } from "@/pages/lib/firebase"; // Make sure to update the import path accordingly
+import { db } from "@/lib/firebase"; // Make sure to update the import path accordingly
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 

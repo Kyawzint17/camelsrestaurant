@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from '@/styles/activity.module.css';
 import Link from "next/link";
 import React, { useState, useEffect } from 'react';
-import { db } from "@/pages/lib/firebase";
+import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 export default function customerActivity() {
