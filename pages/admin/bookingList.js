@@ -303,6 +303,22 @@ export default function BookingList() {
         }
     };
     
+        // Check if styles loaded correctly
+        const [stylesLoaded, setStylesLoaded] = useState(true);
+
+        // This function can be called to check if styles are applied correctly
+        const checkStyles = () => {
+            const calendarElement = document.querySelector(`.${styles.calendar}`);
+            if (!calendarElement) {
+                setStylesLoaded(false); // Set to false if the calendar styles are not applied
+            }
+        };
+    
+        // Call checkStyles when component mounts
+        useEffect(() => {
+            checkStyles();
+        }, []);
+
     return (
         <>
             <AdminNavbar />
@@ -312,16 +328,14 @@ export default function BookingList() {
                         <div className={styles.head}>BOOKING LIST</div>   
                         <div className={styles.calendarContainer}>
                             <div className={styles.squareBox6}>
-                                <div className={styles.calendar}>
-                                    <h3>Select a Date</h3>
-                                    <Calendar
-                                        onChange={handleDateChange}
-                                        value={selectedDate}
-                                        
-                                        tileClassName={tileClassName}
-                                        tileContent={tileContent}
-                                    />
-                                </div> 
+                                <h3>Select a Date</h3>
+                                <Calendar
+                                    onChange={handleDateChange}
+                                    value={selectedDate}
+                                    className={stylesLoaded ? styles.calendar : styles.fallbackCalendar} // Apply fallback styles if needed
+                                    tileClassName={tileClassName}
+                                    tileContent={tileContent}
+                                />
                             </div>
                         </div>
                         <div className={styles.bookingListSection}>
