@@ -312,14 +312,16 @@ export default function BookingList() {
                         <div className={styles.head}>BOOKING LIST</div>   
                         <div className={styles.calendarContainer}>
                             <div className={styles.squareBox6}>
-                                <h3>Select a Date</h3>
-                                <Calendar
-                                    onChange={handleDateChange}
-                                    value={selectedDate}
-                                    className={styles.calendar}
-                                    tileClassName={tileClassName}
-                                    tileContent={tileContent}
-                                />
+                                <div className={styles.calendar}>
+                                    <h3>Select a Date</h3>
+                                    <Calendar
+                                        onChange={handleDateChange}
+                                        value={selectedDate}
+                                        
+                                        tileClassName={tileClassName}
+                                        tileContent={tileContent}
+                                    />
+                                </div> 
                             </div>
                         </div>
                         <div className={styles.bookingListSection}>
