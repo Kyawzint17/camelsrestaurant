@@ -1560,44 +1560,15 @@
 }
 
 .squareBox6 h3 {
-    color: #000;
+    color:#000;
 }
 
 .calendar {
     width: 100%;
     border: none;
-    background-color: black; /* Set background color to black */
-    color: white; /* Set text color to white */
-    color-scheme: dark; /* Optionally specify dark mode support */
+    color: #000;
+    color-scheme: black;
 }
-
-/* Add additional styles for individual tiles */
-.calendar .react-calendar__tile {
-    background: none; /* Make sure tiles have no background */
-}
-
-.calendar .react-calendar__tile--active {
-    background: rgba(255, 255, 255, 0.2); /* Optional: style for the active tile */
-    color: white; /* Ensure the active tile text is white */
-}
-
-.calendar .react-calendar__tile--now {
-    background: rgba(255, 255, 255, 0.3); /* Optional: style for the current date */
-    color: white; /* Ensure the current date text is white */
-}
-
-/* Adjust the header styles if needed */
-.calendar .react-calendar__navigation {
-    background: black; /* Black background for the header */
-    color: white; /* White text color for the header */
-}
-
-/* Adjusting tile hover styles */
-.calendar .react-calendar__tile:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Optional: background color on hover */
-    color: white; /* Ensure hover text is white */
-}
-
 
 .bookingListSection {
     width: 100%;
