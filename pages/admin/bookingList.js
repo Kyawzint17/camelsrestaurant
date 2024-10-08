@@ -303,22 +303,6 @@ export default function BookingList() {
         }
     };
     
-        // Check if styles loaded correctly
-        const [stylesLoaded, setStylesLoaded] = useState(true);
-
-        // This function can be called to check if styles are applied correctly
-        const checkStyles = () => {
-            const calendarElement = document.querySelector(`.${styles.calendar}`);
-            if (!calendarElement) {
-                setStylesLoaded(false); // Set to false if the calendar styles are not applied
-            }
-        };
-    
-        // Call checkStyles when component mounts
-        useEffect(() => {
-            checkStyles();
-        }, []);
-
     return (
         <>
             <AdminNavbar />
@@ -332,7 +316,7 @@ export default function BookingList() {
                                 <Calendar
                                     onChange={handleDateChange}
                                     value={selectedDate}
-                                    className={stylesLoaded ? styles.calendar : styles.fallbackCalendar} // Apply fallback styles if needed
+                                    className={styles.calendar}
                                     tileClassName={tileClassName}
                                     tileContent={tileContent}
                                 />

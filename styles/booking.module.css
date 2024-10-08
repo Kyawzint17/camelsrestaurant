@@ -1568,23 +1568,6 @@
     color-scheme: black !important;
 }
 
-/* Fallback Calendar Styles */
-.fallbackCalendar {
-    background-color: #f9f9f9; /* Light background */
-    border: 1px solid #ccc; /* Simple border */
-    border-radius: 5px; /* Slightly rounded corners */
-    padding: 10px; /* Padding for better spacing */
-}
-
-/* Simple tile styles */
-.fallbackTile {
-    width: 50px; /* Fixed width for simplicity */
-    height: 50px; /* Fixed height */
-    display: flex; /* Use flexbox for centering content */
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-}
-
 .react-calendar {
     background-color: black !important; /* Set calendar background to black */
     color: white !important; /* Set text color to white */
