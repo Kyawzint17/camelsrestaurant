@@ -1503,11 +1503,11 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background: url(/Bookingbackground.png);
+    background: url(./background/Bookingbackground.png);
 }
 
 .bookingPage1 {
-    background: url(/Bookingbackground.png);
+    background: url(./background/Bookingbackground.png);
     min-height: 100vh;
     display: flex;
     align-items: center;
