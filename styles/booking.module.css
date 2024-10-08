@@ -1409,21 +1409,29 @@
     width: 100%;
 }
 
-.ccloseButton {
-    float: right; /* Moves the button to the right */
-    margin-top: 10px;
-    background-color: #f44336; /* Red background */
-    color: white; /* White text */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 15px; /* Padding */
-    cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease; /* Transition effect */
+.modalButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
-.ccloseButton:hover {
-    background-color: #d32f2f; /* Darker red on hover */
+.ccloseButton, .ssubmitButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+.ccloseButton {
+    background-color: red;
+    color: white;
+}
+
+.ssubmitButton {
+    background-color: green;
+    color: white;
+}
+
 
 .viewButton {
     margin-left: 10px;
@@ -1438,6 +1446,51 @@
 
 .viewButton:hover {
     background-color: #1976D2; /* Darker blue on hover */
+}
+
+/* Customer Booking List Display */
+
+.listBox {
+    width: 740px; /* Set the width of the square */
+    height: 650px; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    background-color: #f4f4f4; /* Adjust the background color as needed */
+    position: absolute;
+    top: 400px; /* Center it vertically */
+    left: 100px;
+    transform: translateY(-50%); /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+     /* justify-content: space-between; Align items across the container */
+    align-items: flex-start;
+    font-size: 16px; /* Adjust font size as needed */
+    color: #333; /* Adjust text color as needed */
+    padding: 20px; /* Add padding inside the square */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visual */
+}
+
+.listDetails {
+    display: flex;
+    flex-direction: column;
+    width: 99%; /* Adjust width as needed */
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.bookingIdLink {
+    color: blue; /* Change this to your preferred color */
+    text-decoration: underline; /* Underline for a clickable look */
+    cursor: pointer; /* Cursor indicates it's clickable */
+    margin-top: 10px;
+}
+
+.bookingIdLink:hover {
+    color: darkblue; /* Change color on hover */
+}
+
+.contactRow a {
+    margin-top: 20px;
 }
 
 
@@ -1519,7 +1572,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 400px; /* Adjust the max-height as needed */
+    max-height: 600px; /* Adjust the max-height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -1655,9 +1708,20 @@
     background: #e2c81c; /* Bright Yellow */
     color: #3409f2; /* Change text color */
     font-weight: bold;
-    border-radius: 50%; /* Optional: to make it circular */
+   /* Optional: to make it circular  border-radius: 100%; */
 }
 
+.bookingCount {
+    position: absolute;
+    bottom: 10px; /* Adjusted for visibility */
+    right: -7px; /* Adjusted for visibility */
+    font-size: 10px;
+    color: #f7f7f7; /* Dark text color for better contrast */
+    background-color: #f5a623; /* Warm amber color for the background */
+    padding: 0px 5px;
+    font-weight: bold;
+    z-index: 1; /* Ensures it's on top */
+}
 
 .text {
     color: #000;

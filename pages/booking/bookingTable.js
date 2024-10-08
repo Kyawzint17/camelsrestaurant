@@ -40,7 +40,7 @@ export default function bookingTable() {
                         // Check if the booking belongs to the current user
                         if (bookingData.email === email) {
                             // Check the booking status and reset if needed
-                            if (bookingData.bookingStatus === 'cancelled' || bookingData.bookingStatus === 'completed') {
+                            if (bookingData.bookingStatus === 'Cancelled' || bookingData.bookingStatus === 'Completed' || bookingData.bookingStatus === 'Incompleted') {
                                 // Reset the booking data
                                 sessionStorage.removeItem('bookingId');
                                 setSelectedDate(null);

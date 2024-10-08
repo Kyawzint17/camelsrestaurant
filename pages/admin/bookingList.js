@@ -5,107 +5,9 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { format, startOfDay, isSameDay, parseISO } from 'date-fns';
-
-// Sample data
-const bookings = [
-    {
-        id: 1,
-        firstName: 'John Doe',
-        numberOfPeople: 2, 
-        email: 'john.doe@example.com',
-        phoneNumber: '123-456-7890',
-        totalNumberOfSeats: 2,
-        tableNumber: ['12', '1'],
-        date: '2024-09-24',
-        timeSlot: '19:00 - 20:00',
-        totalBookingFee: 200, // Assuming each seat costs 100
-        imageUrl: '/receipt.png', // Updated path
-        preorderMenu: ['Chicken Alfredo', 'Caesar Salad'],
-        bookingStatus: 'Payment Incomplete',
-        message: 'I have a gluten allergy.'
-    },
-    {
-        id: 2,
-        firstName: 'Jane Smith',
-        numberOfPeople: 1,
-        email: 'jane.smith@example.com',
-        phoneNumber: '987-654-3210',
-        totalNumberOfSeats: 1,
-        tableNumber: ['12'],
-        date: '2024-09-25',
-        timeSlot: '19:00 - 20:00',
-        totalBookingFee: 100, // Cost for one seat
-        imageUrl: '/receipt.png', // Updated path
-        preorderMenu: [],
-        bookingStatus: 'Pending',
-        message: 'It\'s a birthday celebration.'
-    },
-    {
-        id: 3,
-        firstName: 'Bob Johnson',
-        numberOfPeople: 2, 
-        email: 'bob.johnson@example.com',
-        phoneNumber: '456-789-0123',
-        totalNumberOfSeats: 2,
-        tableNumber: ['12', '1'],
-        date: '2024-09-25',
-        timeSlot: '19:00 - 20:00',
-        totalBookingFee: 200, // Cost for two seats
-        imageUrl: '/receipt.png', // Updated path
-        preorderMenu: [],
-        bookingStatus: 'Pending',
-        message: 'Please prepare a vegetarian meal.'
-    },
-    {
-        id: 4,
-        firstName: 'Alice Brown',
-        numberOfPeople: 3,
-        email: 'alice.brown@example.com',
-        phoneNumber: '321-654-0987',
-        totalNumberOfSeats: 3,
-        tableNumber: ['12', '1', '3'],
-        date: '2024-09-26',
-        timeSlot: '19:00 - 20:00',
-        totalBookingFee: 300, // Cost for three seats
-        imageUrl: '/receipt.png', // Updated path
-        preorderMenu: ['Veggie Pizza', 'Garlic Bread'],
-        bookingStatus: 'Confirmed',
-        message: 'Allergic to nuts.'
-    },
-    {
-        id: 5,
-        firstName: 'Alice Brown',
-        numberOfPeople: 3,
-        email: 'alice.brown@example.com',
-        phoneNumber: '321-654-0987',
-        totalNumberOfSeats: 3,
-        tableNumber: ['12', '1', '3'],
-        date: '2024-09-26',
-        timeSlot: '19:00 - 20:00',
-        totalBookingFee: 300, // Cost for three seats
-        imageUrl: '/receipt.png', // Updated path
-        preorderMenu: ['Veggie Pizza', 'Garlic Bread'],
-        bookingStatus: 'Cancelled',
-        message: 'Allergic to nuts.'
-    },
-    {
-        id: 6,
-        firstName: 'Alice Brown',
-        numberOfPeople: 3,
-        email: 'alice.brown@example.com',
-        phoneNumber: '321-654-0987',
-        totalNumberOfSeats: 3,
-        tableNumber: ['12', '1', '3'],
-        date: '2024-09-26',
-        timeSlot: '19:00 - 20:00',
-        totalBookingFee: 300, // Cost for three seats
-        imageUrl: '/receipt.png', // Updated path
-        preorderMenu: ['Veggie Pizza', 'Garlic Bread'],
-        bookingStatus: 'Pending',
-        message: 'Allergic to nuts.'
-    }
-];
-
+import { db, storage} from "@/pages/lib/firebase"; // Ensure this path is correct
+import { collection, getDocs, query, where, getDoc, doc, updateDoc  } from "firebase/firestore";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 const Modal = ({ isOpen, onClose, onConfirm, booking }) => {
     if (!isOpen) return null;
@@ -114,7 +16,7 @@ const Modal = ({ isOpen, onClose, onConfirm, booking }) => {
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
                 <h3>Confirm Booking</h3>
-                <p>Are you sure you want to accept the booking for {booking.firstName}{booking.lastName}?</p>
+                <p>Are you sure you want to accept the booking for {booking.firstName} {booking.lastName}?</p>
                 <div className={styles.modalButtons}>
                     <button onClick={onConfirm} className={styles.confirmButton}>Yes</button>
                     <button onClick={onClose} className={styles.declineButton}>No</button>
@@ -130,8 +32,8 @@ const DeleteModal = ({ isOpen, onClose, onConfirm, booking }) => {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
-                <h3>Delete Booking</h3>
-                <p>Are you sure you want to decline the booking for {booking.firstName}{booking.lastName}?</p>
+                <h3>Decline Booking</h3>
+                <p>Are you sure you want to decline the booking for {booking.firstName} {booking.lastName}?</p>
                 <div className={styles.modalButtons}>
                     <button onClick={onConfirm} className={styles.confirmButton}>Yes</button>
                     <button onClick={onClose} className={styles.declineButton}>No</button>
@@ -191,6 +93,7 @@ const ImageModal = ({ isOpen, onClose, imageUrl }) => {
 
 
 export default function BookingList() {
+    const [bookings, setBookings] = useState([]); // State to store fetched bookings
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [filteredBookings, setFilteredBookings] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
@@ -200,6 +103,7 @@ export default function BookingList() {
     const [imageModalOpen, setImageModalOpen] = useState(false);
     const [selectedImageUrl, setSelectedImageUrl] = useState('');
     const [selectedStatus, setSelectedStatus] = useState(''); // New state for status filter
+    const [bookingCounts, setBookingCounts] = useState({}); 
 
     // Effect to filter bookings based on the selected date
     useEffect(() => {
@@ -214,11 +118,46 @@ export default function BookingList() {
         filterBookings(selectedDate, selectedStatus);
     }, [selectedDate, selectedStatus]);
 
+    useEffect(() => {
+        const fetchBookings = async () => {
+            try {
+                const bookingsRef = collection(db, 'camels', 'camelsrestaurant', 'reservedSeats');
+                const bookingSnapshot = await getDocs(bookingsRef);
+                const bookingList = bookingSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const currentDate = new Date();
+                const filteredBookings = bookingList.filter(booking => 
+                    isSameDay(startOfDay(parseISO(booking.date)), startOfDay(currentDate))
+                );
+                setBookings(bookingList);
+                setFilteredBookings(filteredBookings); // Initialize filtered bookings with bookings for the current date
+                calculateBookingCounts(bookingList);
+            } catch (error) {
+                console.error('Error fetching bookings:', error);
+            }
+        };
+    
+        fetchBookings();
+    }, []); // Empty dependency array means this runs once on mount
+    
+
+    // Calculate the total number of bookings for each date
+    const calculateBookingCounts = (bookingList) => {
+        const counts = {};
+        bookingList.forEach(booking => {
+            const bookingDate = format(parseISO(booking.date), 'yyyy-MM-dd');
+            if (counts[bookingDate]) {
+                counts[bookingDate] += 1;
+            } else {
+                counts[bookingDate] = 1;
+            }
+        });
+        setBookingCounts(counts);
+    };
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        const startOfSelectedDate = startOfDay(date); // Normalize the selected date
         const filtered = bookings.filter(booking => 
-            isSameDay(startOfDay(parseISO(booking.date)), startOfSelectedDate)
+            isSameDay(startOfDay(parseISO(booking.date)), startOfDay(date))
         );
         setFilteredBookings(filtered);
     };
@@ -245,6 +184,21 @@ export default function BookingList() {
         return hasBooking ? styles.highlightedDate : null;
     };    
 
+    // Function to display booking count on each date in the calendar
+    const tileContent = ({ date, view }) => {
+        const dateString = format(date, 'yyyy-MM-dd');
+        if (view === 'month' && bookingCounts[dateString]) {
+            return (
+                <div style={{ position: 'relative' }}>
+                    <span className={styles.bookingCount}>
+                        {bookingCounts[dateString]}
+                    </span>
+                </div>
+            );
+        }
+        return null;
+    };
+
     const handleConfirmClick = (booking) => {
         setSelectedBooking(booking);
         setModalOpen(true);
@@ -265,21 +219,88 @@ export default function BookingList() {
         setImageModalOpen(true);
     };
 
-    const handleModalConfirm = () => {
-        // Here you would update the booking status in your data/store
-        console.log(`Booking confirmed for: ${selectedBooking.name}`);
-        setModalOpen(false);
+    const handleModalConfirm = async () => {
+        try {
+            // Reference to the specific booking document in Firestore
+            const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'reservedSeats', selectedBooking.id);
+    
+            // Retrieve the current booking document
+            const bookingSnapshot = await getDoc(bookingRef);
+    
+            // Check if the document exists and retrieve the current booking status
+            if (bookingSnapshot.exists()) {
+                const currentBookingStatus = bookingSnapshot.data().bookingStatus;
+    
+                // Add condition to prevent confirmation if bookingStatus is "Declined" or "Cancelled"
+                if (currentBookingStatus === "Declined" || currentBookingStatus === "Cancelled") {
+                    alert(`Booking cannot be confirmed because it has been ${currentBookingStatus}.`);
+                    return; // Exit the function
+                }
+    
+                // Proceed with confirmation if the bookingStatus is eligible
+                await updateDoc(bookingRef, {
+                    bookingStatus: "Confirmed"
+                });
+    
+                alert("Booking confirmed successfully!");
+                console.log(`Booking confirmed for: ${selectedBooking.firstName} ${selectedBooking.lastName}`);
+    
+                // Close the modal after the update
+                setModalOpen(false);
+    
+                // Optionally, refresh the booking list after confirming
+                // fetchBookings(); // Call this function to refresh the data
+            } else {
+                console.error("Booking not found.");
+            }
+        } catch (error) {
+            console.error("Error confirming booking:", error);
+        }
     };
 
-    const handleModalDelete= () => {
-        // Here you would update the booking status in your data/store
-        console.log(`Booking confirmed for: ${selectedBooking.name}`);
-        setDeleteModalOpen(false);
+    const handleModalDelete = async () => {
+        try {
+            // Reference to the specific booking document in Firestore
+            const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'reservedSeats', selectedBooking.id);
+    
+            // Update the bookingStatus field to "Declined"
+            await updateDoc(bookingRef, {
+                bookingStatus: "Declined"
+            });
+    
+            alert("Booking declined successfully!");
+            console.log(`Booking declined for: ${selectedBooking.firstName} ${selectedBooking.lastName}`);
+    
+            // Close the delete modal after the update
+            setDeleteModalOpen(false);
+    
+            // Optionally, refresh the booking list after declining
+            // fetchBookings(); // Call this function to refresh the data
+        } catch (error) {
+            console.error("Error declining booking:", error);
+        }
     };
 
-    const handlePaymentConfirm = (amount) => {
-        console.log(`Additional payment of ${amount} needed for: ${selectedBooking.firstName} ${selectedBooking.lastName}`);
-        // Here you would update the payment status in your data/store
+    const handlePaymentConfirm = async (amount) => {
+        try {
+            // Reference to the specific booking document in Firestore
+            const bookingRef = doc(db, 'camels', 'camelsrestaurant', 'reservedSeats', selectedBooking.id);
+    
+            // Update the paymentStatus to "Payment Incomplete" and add the amount field
+            await updateDoc(bookingRef, {
+                bookingStatus: "Payment Incomplete",
+                amount: amount // Adding the amount of money the customer needs to pay
+            });
+    
+            alert(`Payment incomplete! Customer needs to pay an additional ${amount}`);
+            console.log(`Additional payment of ${amount} needed for: ${selectedBooking.firstName} ${selectedBooking.lastName}`);
+    
+            // Optionally, refresh the booking list after updating the payment
+            // fetchBookings(); // Call this function to refresh the data
+    
+        } catch (error) {
+            console.error("Error updating payment information:", error);
+        }
     };
     
     return (
@@ -297,6 +318,7 @@ export default function BookingList() {
                                     value={selectedDate}
                                     className={styles.calendar}
                                     tileClassName={tileClassName}
+                                    tileContent={tileContent}
                                 />
                             </div>
                         </div>
@@ -313,6 +335,7 @@ export default function BookingList() {
                                     <option value="">All</option>
                                     <option value="Pending">Pending</option>
                                     <option value="Confirmed">Confirmed</option>
+                                    <option value="Declined">Declined</option>
                                     <option value="Cancelled">Cancelled</option>
                                     <option value="Payment Incomplete">Payment Incomplete</option>
                                     {/* Add other statuses as needed */}
@@ -322,19 +345,18 @@ export default function BookingList() {
                                 filteredBookings.map((booking) => (
                                     <div key={booking.id} className={styles.bookingItem}>
                                         <div className={styles.section}>
-                                            <h3 className={styles.header}>Booking Seat {booking.id}</h3>
+                                            <h3 className={styles.header}>Booking ID: {booking.id}</h3>
                                             <div className={styles.details}>
                                                 <div>
                                                     <p><strong>Name:</strong> {booking.firstName} {booking.lastName}</p>
-                                                    <p><strong>No of People:</strong> {booking.id}</p>
+                                                    <p><strong>No of People:</strong> {booking.numberOfPeople}</p>
                                                 </div>
                                                 <div>
                                                     <p><strong>Email:</strong> {booking.email}</p>
-                                                    <p><strong>Phone Number:</strong> {booking.phoneNumber}</p>
+                                                    <p><strong>Phone Number:</strong> {booking.phone}</p>
                                                 </div>
                                                 <div>
-                                                    <p><strong>No of Seats:</strong> {booking.tableNumber.length}</p>
-                                                    <p><strong>Table No.:</strong> {booking.tableNumber.join(', ')}</p>
+                                                    <p><strong>Status:</strong> {booking.bookingStatus}</p>    
                                                 </div>
                                             </div>
                                         </div>
@@ -343,24 +365,36 @@ export default function BookingList() {
                                             <div className={styles.details}>
                                                 <div>
                                                     <p><strong>Date:</strong> {booking.date}</p>
-                                                    <p><strong>Time:</strong> {booking.time}</p>
+                                                    <p><strong>Time:</strong> {booking.timeSlot}</p>
                                                 </div>
                                                 <div>
-                                                    <p><strong>Booking Fee:</strong> {booking.totalBookingFee}</p>
+                                                    <p><strong>No of Seats:</strong> {booking.selectedSeats?.length || 0}</p>
+                                                    <p><strong>Table No.:</strong> {booking.selectedSeats && booking.selectedSeats.join(', ')}</p>
+                                                </div>
+                                                <div>
+                                                    <p><strong>Booking Fee:</strong> ฿{booking.totalBookingFee}</p>
                                                     <div>
-                                                        <p><strong>Approval Image:</strong>
+                                                        <p><strong>Receipt:</strong>
                                                             <span
                                                                 className={styles.imageLink}
-                                                                onClick={() => handleImageClick(booking.imageUrl)}
+                                                                onClick={() => handleImageClick(booking.receiptImage)}
                                                             >
-                                                                {booking.imageUrl}
+                                                                Receipt
                                                             </span>
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <p><strong>Preorder Menu:</strong> {booking.preorderMenu.length > 0 ? booking.preorderMenu.join(', ') : 'None'}</p>
-                                                    <p><strong>Status:</strong> {booking.bookingStatus}</p>
+                                                    <p>
+                                                        <strong>Preorder Menu:</strong> 
+                                                        {booking.menuOrders && booking.menuOrders.length > 0 ? (
+                                                            booking.menuOrders.map((order, index) => (
+                                                                `${order.quantity} x ${order.title}` + (index < booking.menuOrders.length - 1 ? ', ' : '')
+                                                            )).join('')
+                                                        ) : (
+                                                            'No menu orders placed.'
+                                                        )}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

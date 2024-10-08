@@ -5,7 +5,7 @@ import styles from '@/styles/booking.module.css';
 import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/pages/lib/firebase";
-import { collection, doc, setDoc, query, where, getDocs, updateDoc, getDoc, deleteDoc } from "firebase/firestore"; 
+import { collection, doc, setDoc, query, where, getDocs, updateDoc, getDoc, deleteDoc, serverTimestamp } from "firebase/firestore"; 
 import { getAuth } from "firebase/auth"; 
 import { useRouter } from 'next/router';
 
@@ -58,6 +58,17 @@ export default function SeatSelection() {
                 const reservedSeatDocs = await getDocs(reservedSeatQuery);
                 if (reservedSeatDocs.docs.length > 0) {
                   const reservedSeatData = reservedSeatDocs.docs[0].data();
+                  
+                  // Check if the booking status is "Cancelled"
+                  if (reservedSeatData.bookingStatus === "Cancelled") {
+                    console.log("Booking is cancelled. No selected seats to display.");
+                    setSelectedSeats([]); // Clear selected seats
+                    setMessage(''); // Clear message
+                    setTotalBookingFee(0); // Reset total booking fee
+                    setNumPeople(0); // Reset number of people
+                    return; // Exit if the booking is cancelled
+                    }
+
                   const selectedSeats = reservedSeatData.selectedSeats.map(seatName => {
                     return seatData.find(seat => seat.seatName === seatName);
                   });
@@ -235,8 +246,9 @@ export default function SeatSelection() {
                             totalBookingFee: totalBookingFee,
                             timeSlot: timeSlot,
                             date: date,
-                            bookingStatus: "Reserved", // Example status
-                            email: email
+                            bookingStatus: "Pending", // Example status
+                            email: email,
+                            createdAt: serverTimestamp()
                         });
                         console.log('Seat data updated successfully in reservedSeats collection');
                     } catch (error) {

@@ -4,14 +4,21 @@ import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import styles from '@/styles/customer.module.css';
 import Link from "next/link";
-import { db } from "@/pages/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { db, auth } from "@/pages/lib/firebase";
+import { collection, getDocs, query, where  } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { useRouter } from 'next/router';
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function customerHome() {
     
         const [currentEventIndex, setCurrentEventIndex] = useState(0);
         const [posts, setPosts] = useState([]); // State for posts
-
+        const [bookingStatus, setBookingStatus] = useState("");
+        const [userEmail, setUserEmail] = useState("");
+        const [isLoading, setIsLoading] = useState(true); 
+        const router = useRouter();
+        
          // Fetching activity posts from Firestore
         useEffect(() => {
             const fetchPosts = async () => {
@@ -31,6 +38,39 @@ export default function customerHome() {
 
             fetchPosts();
         }, []);
+
+
+        useEffect(() => {
+            const auth = getAuth();
+        
+            const unsubscribe = onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    setUserEmail(user.email); // Set user email if authenticated
+                } else {
+                    setUserEmail(null); // Reset user email if not authenticated
+                }
+            });
+        
+            return () => unsubscribe(); // Cleanup subscription on unmount
+        }, []);
+
+         // Check if the user has a reserved seat
+         useEffect(() => {
+            if (userEmail) {
+                const checkBookingStatus = async () => {
+                    setIsLoading(true);
+                    const reservedSeatsRef = collection(db, 'camels', 'camelsrestaurant', 'reservedSeats');
+                    const q = query(reservedSeatsRef, where("email", "==", userEmail), where("bookingStatus", "in", ["Pending", "Payment Incomplete"]));
+                    const snapshot = await getDocs(q);
+                    setBookingStatus(!snapshot.empty); // Set booking status based on Firestore result
+                    setIsLoading(false);
+                };
+        
+                checkBookingStatus();
+            } else {
+                setBookingStatus(false); // Reset booking status if user is not logged in
+            }
+        }, [userEmail]);
 
         // Navigate to the previous event
         const handlePrevEvent = () => {
@@ -55,9 +95,23 @@ export default function customerHome() {
                     <Link href={'/customer/customerMenu'}>
                         <button className={styles.menuButton}>Menu</button>
                     </Link>
-                    <Link href={'/booking/bookingTable'}>
-                        <button className={styles.bookTableButton}>Book a Table</button>
-                    </Link>
+                   
+                    {isLoading ? (
+                      <button className={styles.bookTableButton} disabled>Loading...</button>
+                    ) : (
+                      <button className={styles.bookTableButton}
+                              onClick={() => {
+                                  if (bookingStatus) {
+                                  alert("You already have a reserved table. Please check your booking status.");
+                                  } else {
+                                   router.push(`/booking/bookingTable`);
+                                  }
+                              }}
+                          >
+                              {bookingStatus ? "Already Booked" : "Book a Table"}
+                      </button>
+                    )}
+                    
                 </div>
 
                 <div className={styles.head}>ANNOUNCEMENT</div>
@@ -111,10 +165,10 @@ export default function customerHome() {
                                     <strong>Late Arrival:</strong> Reserved seats will be cancelled if customers arrive 30 minutes after the appointed time.
                                 </li>
                                 <li>
-                                    <strong>Reservation Limitations:</strong> Customers can make a new reservation only if their previous booking status is 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚𝙙, 𝙢𝙞𝙨𝙨𝙚𝙙, or 𝙘𝙖𝙣𝙘𝙚𝙡𝙡𝙚𝙙. However, statuses of 𝙥𝙚𝙣𝙙𝙞𝙣𝙜 or 𝙥𝙖𝙮𝙢𝙚𝙣𝙩 𝙞𝙣𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚 will prevent new reservations.
+                                    <strong>Reservation Limitations:</strong> Customers can make a new reservation only if their previous booking status is 𝘾𝙤𝙣𝙛𝙞𝙧𝙢𝙚𝙙, 𝘿𝙚𝙘𝙡𝙞𝙣𝙚𝙙, or 𝘾𝙖𝙣𝙘𝙚𝙡𝙡𝙚𝙙. However, status of 𝙍𝙚𝙨𝙚𝙧𝙫𝙚𝙙 or 𝙋𝙖𝙮𝙢𝙚𝙣𝙩 𝙄𝙣𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚 will prevent new reservations.
                                 </li>
                                 <li>
-                                    <strong>24-Hour Payment Reminder:</strong> Customers will have 𝟐𝟒 hours to pay the remaining booking fee if the initial booking payment is insufficient.
+                                    <strong>24-Hour Payment Reminder:</strong> Customers will have 𝟐𝟒 hours to pay the remaining booking fee if the initial booking payment is insufficient as status will be shown as 𝙋𝙖𝙮𝙢𝙚𝙣𝙩 𝙄𝙣𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚.
                                 </li>
                             </ul>
                     </div>

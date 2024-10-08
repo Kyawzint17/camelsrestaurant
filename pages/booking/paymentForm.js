@@ -5,19 +5,58 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '@/styles/booking.module.css';
 import { db, storage } from "@/pages/lib/firebase"; // Ensure this path is correct
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, getDocs, deleteDoc, doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
 
 export default function paymentForm() {
 
     const router = useRouter();
-    const { bookingId } = router.query;
+    const [bookingId, setBookingId] = useState(null);
     const [bookingFee, setBookingFee] = useState(0);
     const [bookingDetails, setBookingDetails] = useState(null); // Store date, time, and seats
     const [order, setOrder] = useState([]);
     const [message, setMessage] = useState('');
     const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState('');
+    const [userEmail, setUserEmail] = useState("");
+
+    useEffect(() => {
+        const storedBookingId = localStorage.getItem('bookingId');
+        if (storedBookingId) {
+          setBookingId(storedBookingId);
+        }
+      }, []);
+    
+    useEffect(() => {
+        if (bookingId) {
+          localStorage.setItem('bookingId', bookingId);
+        }
+      }, [bookingId]);
+    
+    useEffect(() => {
+        const { bookingId: queryBookingId } = router.query; // Get bookingId from URL query
+        if (queryBookingId) {
+          setBookingId(queryBookingId);
+        }
+      }, [router.query])
+
+
+    useEffect(() => {
+        const auth = getAuth();
+    
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserEmail(user.email); // Set user email if authenticated
+            } else {
+                setUserEmail(null); // Reset user email if not authenticated
+            }
+        });
+    
+        return () => unsubscribe(); // Cleanup subscription on unmount
+    }, []);
 
     const handleImageChange = (e) => {
         if (e.target.files[0]) {
@@ -25,8 +64,46 @@ export default function paymentForm() {
         }
     };
 
+    const uploadImage = async (image) => {
+        const storageRef = ref(storage, `receipt/${userEmail}_${Date.now()}`);
+        await uploadBytes(storageRef, image);
+        const url = await getDownloadURL(storageRef);
+        return url;
+    };
+    
+    const handlePaymentSubmit = async () => {
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const phone = document.getElementById("phone").value;
+
+        let receiptUrl = '';
+        if (image) {
+            receiptUrl = await uploadImage(image);
+        }
+
+        const paymentData = {
+            firstName,
+            lastName,
+            phone,
+            receiptImage: receiptUrl, // The URL of the uploaded image
+        };
+
+        try {
+            const reservedSeatsRef = collection(db, 'camels', 'camelsrestaurant', 'reservedSeats');
+            const seatDocRef = doc(reservedSeatsRef, bookingId); // Use the bookingId to reference the correct document
+            await updateDoc(seatDocRef, paymentData);
+            console.log('Payment data updated successfully!');
+            router.push(`/customer/customerBookList?bookingId=${bookingId}`);
+            console.log("Redirecting to customer booking list page with bookingId:", bookingId);
+            // Optionally redirect or show a success message
+        } catch (error) {
+            console.error('Error updating payment data: ', error);
+        }
+    };
+    
+
     const calculateTotal = () => {
-        return order.reduce((total, item) => total + (parseFloat(item.price.toString().replace('$', '')) * item.quantity), 0).toFixed(2);
+        return order.reduce((total, item) => total + (parseFloat(item.price.toString().replace('฿', '')) * item.quantity), 0).toFixed(2);
       };
 
   
@@ -68,7 +145,7 @@ export default function paymentForm() {
                                 <div className={styles.paymentDetails}>
                                     <div className={styles.contact}>
                                             <h3>Contact Information</h3>
-                                            <form>
+                                            <form onSubmit={handlePaymentSubmit}>
                                                 <div className={styles.pformGroup}>
                                                     <label htmlFor="firstName">First Name</label>
                                                     <input type="text" id="firstName" name="firstName" />
@@ -85,7 +162,7 @@ export default function paymentForm() {
                                         </div>
                                         <div className={styles.payment}>
                                             <h3>QR Code Payment</h3>
-                                            <form>  
+                                            <form onSubmit={handlePaymentSubmit}>  
                                                 <div className={styles.pformGroup}>
                                                     <div className={styles.qrCodeWrapper}>
                                                         {/* Display your PromptPay QR code here */}
@@ -184,7 +261,7 @@ export default function paymentForm() {
                                     <button className={styles.navButton4}>BACK</button>
                                     </Link>
                                     
-                                    <button className={styles.navButton4}>CONFIRM</button>
+                                    <button className={styles.navButton4} onClick={handlePaymentSubmit}>CONFIRM</button>
                                 
                                 </div>
                             </div>

@@ -63,8 +63,18 @@ export default function menuOrder() {
                   const seatDoc = await getDoc(seatDocRef);
 
                   if (seatDoc.exists()) {
-                      setBookingDetails(seatDoc.data()); // Set booking details
-                      setOrder(seatDoc.data().menuOrders || []); // Load menu orders
+                      const bookingData = seatDoc.data();
+                      setBookingDetails(bookingData); // Set booking details
+                       // Check if bookingStatus is not 'Cancelled'
+                      if (bookingData.bookingStatus !== 'Cancelled') {
+                        setBookingDetails(bookingData); // Set booking details
+                        setOrder(bookingData.menuOrders || []); // Load menu orders
+                    } else {
+                        // Optionally handle the case where the booking is cancelled
+                        setBookingDetails(null); // Clear booking details
+                        setOrder([]); // Clear menu orders
+                        console.log('Booking is cancelled, not displaying details.');
+                    }
                   }
               } catch (error) {
                   console.error('Error fetching booking details: ', error);
@@ -84,7 +94,16 @@ export default function menuOrder() {
               const seatDoc = await getDoc(seatDocRef);
       
               if (seatDoc.exists()) {
+                const seatData = seatDoc.data();
                 const menuOrders = seatDoc.data().menuOrders;
+
+                 // Check if the booking status is "Cancelled"
+                 if (seatData.bookingStatus === "Cancelled") {
+                  console.log("Booking is cancelled. No menu data to display.");
+                  setOrder([]); // Clear order if the booking is cancelled
+                  return; // Exit if the booking is cancelled
+                }
+
                 if (menuOrders) {
                   setOrder(menuOrders);
                 }
@@ -160,6 +179,10 @@ export default function menuOrder() {
           }
       
           console.log('Reserved seats updated successfully!');
+
+          // Delay navigation to the payment form
+          await new Promise(resolve => setTimeout(resolve, 1000)); // 1000 ms = 1 second
+
           // Redirect to the next page
           router.push(`/booking/paymentForm?bookingId=${bookingId}`);
         } catch (error) {
@@ -168,7 +191,7 @@ export default function menuOrder() {
     };
 
     const calculateTotal = () => {
-        return order.reduce((total, item) => total + (parseFloat(item.price.toString().replace('$', '')) * item.quantity), 0).toFixed(2);
+        return order.reduce((total, item) => total + (parseFloat(item.price.toString().replace('฿', '')) * item.quantity), 0).toFixed(2);
       };
 
     const groupedMenuItems = menuItems.reduce((acc, item) => {
