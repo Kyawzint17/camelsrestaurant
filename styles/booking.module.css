@@ -1722,7 +1722,12 @@
     color: white;
 }
 
-
+.highlightedDate {
+    background: #e2c81c; /* Bright Yellow */
+    color: #3409f2; /* Change text color */
+    font-weight: bold;
+   /* Optional: to make it circular  border-radius: 100%; */
+}
 
 .bookingCount {
     position: absolute;
