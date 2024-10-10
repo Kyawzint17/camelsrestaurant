@@ -20,7 +20,17 @@ export default function customerActivity() {
                    id: doc.id,
                    ...doc.data()
                }));
-               
+
+                // Sort posts by startDate in ascending order
+                activityPosts.sort((a, b) => {
+                    const startDateComparison = new Date(a.startDate) - new Date(b.startDate);
+                    if (startDateComparison !== 0) {
+                        return startDateComparison; // If start dates are different, use this result.
+                    } else {
+                        return new Date(a.endDate) - new Date(b.endDate); // If start dates are the same, compare end dates.
+                    }
+                });
+                
                setPosts(activityPosts);
            } catch (error) {
                console.error("Error fetching activities: ", error);
