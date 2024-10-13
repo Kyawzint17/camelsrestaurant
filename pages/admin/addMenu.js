@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from "react";
 import { db, storage } from "@/lib/firebase"; // Make sure to update the import path accordingly
 import { collection, doc, addDoc, setDoc } from "firebase/firestore";
@@ -14,18 +15,38 @@ export default function Addmenu() {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
+    const [fileupload, setFileupload] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const [imageUrl, setImageUrl] = useState('');
 
     let categories = ["All", "Main", "Fried Food", "Salad", "Dessert", "Drinks"];
 
     const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0]);
+        //if (e.target.files[0]) {
+            //setImage(e.target.files[0]);
+        //}
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file); // Now updating image correctly
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setImagePreview(null);
+            setImage(null);  // Reset image state
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!image) {
+            setErrorMessage('Please select an image to upload.');
+            setUploading(false);
+            return;
+          }
 
         try {
             // Upload image to Firebase Storage
@@ -73,7 +94,17 @@ export default function Addmenu() {
                         <div className={Style['container']}>NEW MENU</div>
 
                         <div className={Style['container-pic']}>
-                            <label className={Style['btext']}>Image Upload</label>
+                            {imagePreview && (
+                                <div>
+                                <Image
+                                    src={imagePreview}
+                                    alt="Image preview"
+                                    width={300}
+                                    height={300}
+                                    style={{ width: "100%", height: "auto" }}
+                                />
+                                </div>
+                            )}
                             <input type="file" className={Style['btext2']} onChange={handleImageChange} />
                         </div>
 

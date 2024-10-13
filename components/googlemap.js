@@ -39,7 +39,7 @@ const GoogleMap = () => {
 
           // Add a click listener to the marker to open Google Maps
           marker.addListener("click", () => {
-            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeName)}&query_place_id=ChIJ5Q1e1a-3ajcR6VvKn2X7qds&destination=${location.lat},${location.lng}`;
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeName)}`;
             window.open(googleMapsUrl, "_blank");
           });
         }

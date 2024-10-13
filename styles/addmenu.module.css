@@ -52,23 +52,30 @@
     flex-shrink: 0;
 }
 
-.container-pic{
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  float: left;
-  margin-left: 250px;
-  margin-top: 20px;
-  width: 25vw;
-  height: 25vw;
-  border: 3px solid #BC885C;
-  padding: 40px;
-  border-radius: 20px;
-  box-sizing: border-box; /* Ensure padding is included in the width and height */
-  flex-shrink: 0; /* Prevent shrinking */
+.container-pic {
+    background-color: white;
+    float: left;
+    margin-left: 250px;
+    margin-top: 20px;
+    width: 25vw;
+    height: 25vw;
+    border: 3px solid #BC885C;
+    padding: 40px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;  
 }
+
+.container-pic input[type="file"] {
+    align-self: flex-end; /* Align the file input at the bottom */
+    margin-top: auto;
+  }
+  
+.container-pic img {
+    width: 100%;
+    height: auto;
+  }
 
 .btext {
     margin-bottom: 20px;

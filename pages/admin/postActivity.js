@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from "react";
 import { db, storage } from "@/lib/firebase"; // Make sure to update the import path accordingly
 import { doc, setDoc } from "firebase/firestore";
@@ -14,16 +15,36 @@ export default function PostActivity() {
     const [endDate, setEndDate] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
+    const [fileupload, setFileupload] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const [imageUrl, setImageUrl] = useState('');
 
     const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0]);
+        //if (e.target.files[0]) {
+            //setImage(e.target.files[0]);
+        //}
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file); // Now updating image correctly
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setImagePreview(null);
+            setImage(null);  // Reset image state
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!image) {
+            setErrorMessage('Please select an image to upload.');
+            setUploading(false);
+            return;
+          }
 
         try {
             // Upload image to Firebase Storage
@@ -67,7 +88,17 @@ export default function PostActivity() {
                     <div className={styles['container2']}>
                         <div className={styles['container']}>CREATE POST</div>
                         <div className={styles['container-pic']}>
-                            <label className={styles['btext']}>Image Upload</label>
+                            {imagePreview && (
+                                <div>
+                                <Image
+                                    src={imagePreview}
+                                    alt="Image preview"
+                                    width={300}
+                                    height={300}
+                                    style={{ width: "100%", height: "auto" }}
+                                />
+                                </div>
+                            )}
                             <input type="file" className={styles['btext2']} onChange={handleImageChange} />
                         </div>
                         <form className={styles['container-text']} onSubmit={handleSubmit}>
