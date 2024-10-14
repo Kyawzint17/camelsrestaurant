@@ -1565,7 +1565,7 @@
 
 .calendar {
     color: #000 !important;
-    color-scheme: black !important;
+    color-scheme: normal;
 }
 
 .react-calendar {
