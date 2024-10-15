@@ -117,10 +117,10 @@ export default function restaurantHome() {
                                     <strong>Late Arrival:</strong> Reserved seats will be cancelled if customers arrive 30 minutes after the appointed time.
                                 </li>
                                 <li>
-                                    <strong>Reservation Limitations:</strong> Customers can make a new reservation only if their previous booking status is 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚𝙙, 𝙢𝙞𝙨𝙨𝙚𝙙, or 𝙘𝙖𝙣𝙘𝙚𝙡𝙡𝙚𝙙. However, statuses of 𝙥𝙚𝙣𝙙𝙞𝙣𝙜 or 𝙥𝙖𝙮𝙢𝙚𝙣𝙩 𝙞𝙣𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚 will prevent new reservations.
+                                    <strong>Reservation Limitations:</strong> Customers can make a new reservation only if their previous booking status is 𝘾𝙤𝙣𝙛𝙞𝙧𝙢𝙚𝙙, 𝘿𝙚𝙘𝙡𝙞𝙣𝙚𝙙, or 𝘾𝙖𝙣𝙘𝙚𝙡𝙡𝙚𝙙. However, status of 𝙍𝙚𝙨𝙚𝙧𝙫𝙚𝙙 or 𝙋𝙖𝙮𝙢𝙚𝙣𝙩 𝙄𝙣𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚 will prevent new reservations.
                                 </li>
                                 <li>
-                                    <strong>24-Hour Payment Reminder:</strong> Customers will have 𝟐𝟒 hours to pay the remaining booking fee if the initial booking payment is insufficient.
+                                    <strong>24-Hour Payment Reminder:</strong> Customers will have 𝟐𝟒 hours to pay the remaining booking fee if the initial booking payment is insufficient as status will be shown as 𝙋𝙖𝙮𝙢𝙚𝙣𝙩 𝙄𝙣𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚.
                                 </li>
                             </ul>
                     </div>
