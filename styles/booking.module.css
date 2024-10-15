@@ -157,7 +157,7 @@
 .selectedTime {
     font-size: 16px;
     color: #333;
-    margin: 0 10px; /* Adjust the margin for better spacing */
+    margin: 0 5px; /* Adjust the margin for better spacing */
 }
 
 .promptText {
