@@ -312,9 +312,9 @@ export default function menuOrder() {
                                   <Link href={'/booking/seatSelection'}>
                                   <button className={styles.navButton3}>BACK</button>
                                   </Link>
-                                  <Link href={'/booking/paymentForm'}>
+                                  
                                   <button className={styles.navButton3} onClick={handleNext}>NEXT</button>
-                                  </Link>
+                                 
                              </div>
                         </div>
                         

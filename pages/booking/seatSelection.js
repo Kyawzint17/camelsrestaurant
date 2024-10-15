@@ -447,12 +447,12 @@ export default function SeatSelection() {
                                 />
                             </div>
                             <div className={styles.buttonContainerSeat}>
-                                <Link href={'/booking/bookingTable'}>
+                                
                                 <button className={styles.navButtonSeat} onClick={handleBack}>BACK</button>
-                                </Link>
-                                <Link href={'/booking/menuOrder'}>
+                               
+                               
                                 <button className={styles.navButtonSeat} onClick={handleUpdateBooking}>NEXT</button>
-                                </Link>
+                                
                             </div>
                         </div>
                     </div>

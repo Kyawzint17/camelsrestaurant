@@ -478,8 +478,8 @@
 .buttonContainerSeat {
     margin-top: 20px;
     display: flex;
-    justify-content: space-between; /* Align buttons to the left and right */
-    gap: 10px; /* Space between buttons */
+    justify-content: center; /* Align buttons to the center */
+    gap: 350px; /* Reduced space between buttons */
 }
 
 /* Style for the navigation buttons */
@@ -492,9 +492,10 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-    flex: 1; /* Ensure buttons take up equal space */
+    /* Ensure buttons take up equal space */
     /* Remove the margin-top and margin-right */
 }
+
 /* Hover and active states for the buttons */
 .navButtonSeat:hover {
     background-color: #0056b3; /* Darker blue on hover */
@@ -502,14 +503,6 @@
 
 .navButtonSeat:active {
     transform: scale(0.98); /* Slightly shrink button on click */
-}
-
-.navButtonSeat:first-child {
-    margin-right: 115px; /* Adjust as needed */
-}
-
-.navButtonSeat:last-child {
-    margin-left: 115px; /* Adjust as needed */
 }
   
 /* Booking fees and menu preorder css*/
