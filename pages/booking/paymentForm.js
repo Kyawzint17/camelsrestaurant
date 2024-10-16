@@ -72,6 +72,12 @@ export default function paymentForm() {
     };
     
     const handlePaymentSubmit = async () => {
+
+        if (!image) {
+            alert("Please upload a receipt image before proceeding.");
+            return; // Stop further execution if the image is not uploaded
+        }
+        
         const firstName = document.getElementById("firstName").value;
         const lastName = document.getElementById("lastName").value;
         const phone = document.getElementById("phone").value;
