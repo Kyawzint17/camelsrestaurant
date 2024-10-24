@@ -9,8 +9,9 @@ import { collection, getDocs, query, where  } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { onAuthStateChanged } from "firebase/auth";
+import withAuth from "@/components/withAuth";
 
-export default function customerHome() {
+function customerHome() {
     
         const [currentEventIndex, setCurrentEventIndex] = useState(0);
         const [posts, setPosts] = useState([]); // State for posts
@@ -201,3 +202,5 @@ export default function customerHome() {
         </>
     );
 }
+
+export default withAuth(customerHome);

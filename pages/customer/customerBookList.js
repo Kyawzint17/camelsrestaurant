@@ -9,8 +9,9 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { onAuthStateChanged } from "firebase/auth";
+import withAuth from "@/components/withAuth";
 
-export default function customerBookList() {
+function customerBookList() {
 
     const [bookingFee, setBookingFee] = useState(0);
     const [imageFile, setImageFile] = useState(null);
@@ -400,5 +401,6 @@ export default function customerBookList() {
         </>
     )
 
-
 }
+
+export default withAuth(customerHome);
