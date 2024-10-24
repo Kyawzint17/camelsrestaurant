@@ -403,4 +403,4 @@ function customerBookList() {
 
 }
 
-export default withAuth(customerHome);
+export default withAuth(customerBookList);
